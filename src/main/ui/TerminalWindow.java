@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class LeagueManager extends JFrame {
+public class TerminalWindow extends JFrame {
 
     private JPanel leagueManager;
 
-    public LeagueManager() {
+    public TerminalWindow() {
         super("Basketball League Manager");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
@@ -50,7 +50,7 @@ public class LeagueManager extends JFrame {
      * EFFECT:      Start the program
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        new LeagueManager();
+        new TerminalWindow();
     }
 
 }
