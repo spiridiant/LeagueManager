@@ -185,7 +185,7 @@ public class DatabaseConnectionHandler {
 //		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
 //		insertBranch(branch2);
 
-        dropTablesIfExists();
+//        dropTablesIfExists();
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.setStopOnError(true);
         scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
@@ -201,6 +201,7 @@ public class DatabaseConnectionHandler {
 
             while (rs.next()) {
                 String tableName = rs.getString(1).toLowerCase();
+                System.out.println(tableName);
                 if (tableName.equals("sponsor") ||
                         tableName.equals("division") ||
                         tableName.equals("team") ||
@@ -222,6 +223,7 @@ public class DatabaseConnectionHandler {
                         tableName.equals("wins_season")
                 ) {
                     ps.execute("DROP TABLE " + tableName);
+                    System.out.println("should be DROP TABLE " + tableName);
                 }
             }
 
