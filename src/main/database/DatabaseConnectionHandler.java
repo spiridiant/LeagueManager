@@ -1,7 +1,10 @@
 package main.database;
 
 import main.util.PrintablePreparedStatement;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -142,8 +145,15 @@ public class DatabaseConnectionHandler {
             connection.setAutoCommit(false);
 
             System.out.println("\nConnected to Oracle!");
+
+            databaseSetup();
+
+            System.out.println("\nDatabase set up!");
             return true;
         } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            return false;
+        } catch (FileNotFoundException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
             return false;
         }
@@ -157,7 +167,7 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public void databaseSetup() {
+    public void databaseSetup() throws FileNotFoundException {
 //		dropBranchTableIfExists();
 //
 //		try {
@@ -174,6 +184,12 @@ public class DatabaseConnectionHandler {
 //
 //		BranchModel branch2 = new BranchModel("123 Coco Ave", "Vancouver", 2, "Second Branch", 1234568);
 //		insertBranch(branch2);
+
+        dropTablesIfExists();
+        ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner.setStopOnError(true);
+        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
+
 
     }
 
@@ -206,7 +222,6 @@ public class DatabaseConnectionHandler {
                         tableName.equals("wins_season")
                 ) {
                     ps.execute("DROP TABLE " + tableName);
-                    break;
                 }
             }
 

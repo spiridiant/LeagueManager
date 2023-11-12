@@ -2,7 +2,6 @@ package main.ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class TerminalWindow extends JFrame {
 
@@ -46,11 +45,11 @@ public class TerminalWindow extends JFrame {
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
     }
 
-    /**
-     * EFFECT:      Start the program
-     */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        new TerminalWindow();
-    }
+//    /**
+//     * EFFECT:      Start the program
+//     */
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        new TerminalWindow();
+//    }
 
 }

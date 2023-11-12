@@ -5,6 +5,8 @@ import main.delegates.LoginWindowDelegate;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
+import java.io.FileNotFoundException;
+
 public class LeagueManager  implements LoginWindowDelegate{
     private DatabaseConnectionHandler dbHandler = null;
     private LoginWindow loginWindow = null;
@@ -33,7 +35,7 @@ public class LeagueManager  implements LoginWindowDelegate{
 //            TerminalTransactions transaction = new TerminalTransactions();
 //            transaction.setupDatabase(this);
 //            transaction.showMainMenu(this);
-            TerminalWindow main = new TerminalWindow();
+            new TerminalWindow();
         } else {
             loginWindow.handleLoginFailed();
 
@@ -43,6 +45,16 @@ public class LeagueManager  implements LoginWindowDelegate{
                 System.exit(-1);
             }
         }
+    }
+
+    /**
+     * TerminalOperationDelegate Implementation
+     *
+     * The TerminalTransaction instance tells us that the user is fine with dropping any existing table
+     * called branch and creating a new one for this project to use
+     */
+    public void databaseSetup() throws FileNotFoundException {
+        dbHandler.databaseSetup();;
     }
 
     public static void main(String[] args) {

@@ -22,11 +22,10 @@
             <version>19.8.0.0</version> <!-- Replace with the version you need -->
         </dependency>
 
-        <!-- Flyway Core -->
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>7.0.0</version> <!-- Replace with the version you need -->
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.7</version>
         </dependency>
     </dependencies>
 </project>
