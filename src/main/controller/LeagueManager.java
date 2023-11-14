@@ -2,12 +2,13 @@ package main.controller;
 
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
+import main.delegates.TerminalOperationDelegate;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
 import java.io.FileNotFoundException;
 
-public class LeagueManager  implements LoginWindowDelegate{
+public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDelegate {
     private DatabaseConnectionHandler dbHandler = null;
     private LoginWindow loginWindow = null;
 
@@ -47,6 +48,11 @@ public class LeagueManager  implements LoginWindowDelegate{
         }
     }
 
+    public static void main(String[] args) {
+        LeagueManager leagueManager = new LeagueManager();
+        leagueManager.start();
+    }
+
     /**
      * TerminalOperationDelegate Implementation
      *
@@ -57,8 +63,8 @@ public class LeagueManager  implements LoginWindowDelegate{
         dbHandler.databaseSetup();;
     }
 
-    public static void main(String[] args) {
-        LeagueManager leagueManager = new LeagueManager();
-        leagueManager.start();
+    @Override
+    public void updateContract() {
+        dbHandler.updateContract();
     }
 }

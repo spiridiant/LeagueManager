@@ -281,18 +281,18 @@ INSERT INTO Team VALUES ('Los Angeles Clippers', 139242134, 'Crypto Arena', 'Los
 -- INSERT INTO Manager VALUES (5, 22);
 
 -- Player_Plays_For_Team table
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2018-06-21', 'YYYY-MM-DD'), TO_DATE('1999-02-28', 'YYYY-MM-DD'), 201, 'Luka Doncic', 77, 2473875, 'Mavericks', 'Dallas');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2015-06-25', 'YYYY-MM-DD'), TO_DATE('1993-03-14', 'YYYY-MM-DD'), 203, 'Stephen Curry', 30, 1729634, 'Warriors', 'Golden State');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2014-06-26', 'YYYY-MM-DD'), TO_DATE('1988-12-30', 'YYYY-MM-DD'), 206, 'LeBron James', 23, 1248756, 'Lakers', 'Los Angeles');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), TO_DATE('1989-03-29', 'YYYY-MM-DD'), 201, 'Anthony Davis', 3, 1342351, 'Lakers', 'Los Angeles');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Bucks', 'Milwaukee');
+-- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2018-06-21', 'YYYY-MM-DD'), TO_DATE('1999-02-28', 'YYYY-MM-DD'), 201, 'Luka Doncic', 77, 2473875, 'Mavericks', 'Dallas');
+-- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2015-06-25', 'YYYY-MM-DD'), TO_DATE('1993-03-14', 'YYYY-MM-DD'), 203, 'Stephen Curry', 30, 1729634, 'Warriors', 'Golden State');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2014-06-26', 'YYYY-MM-DD'), TO_DATE('1988-12-30', 'YYYY-MM-DD'), 206, 'LeBron James', 23, 1248756, 'Los Angeles Lakers', 'Los Angeles');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), TO_DATE('1989-03-29', 'YYYY-MM-DD'), 201, 'Anthony Davis', 3, 1342351, 'Los Angeles Lakers', 'Los Angeles');
+-- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Bucks', 'Milwaukee');
 
 -- Signed_Contract table
-INSERT INTO Signed_Contract VALUES (50000, 1, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
-INSERT INTO Signed_Contract VALUES (60000, 2, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
-INSERT INTO Signed_Contract VALUES (70000, 3, 6, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
-INSERT INTO Signed_Contract VALUES (55000, 4, 3, 700000, TO_DATE('2023-10-25', 'YYYY-MM-DD'), 4);
-INSERT INTO Signed_Contract VALUES (65000, 5, 7, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
+-- INSERT INTO Signed_Contract VALUES (50000, 1, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
+-- INSERT INTO Signed_Contract VALUES (60000, 2, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
+INSERT INTO Signed_Contract VALUES (70000, 1248756, 6, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
+INSERT INTO Signed_Contract VALUES (55000, 1342351, 3, 700000, TO_DATE('2023-10-25', 'YYYY-MM-DD'), 4);
+-- INSERT INTO Signed_Contract VALUES (65000, 5, 7, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
 
 -- -- Sponsor_Sponsors_Team table
 -- INSERT INTO Sponsor_Sponsors_Team VALUES (872913, 37, 'Bucks', 'Milwaukee');

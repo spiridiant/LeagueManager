@@ -123,6 +123,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		delegate.login(usernameField.getText(), String.valueOf(passwordField.getPassword()));
+//		delegate.login(usernameField.getText(), String.valueOf(passwordField.getPassword()));
+		delegate.login("ora_fgu05", "a22292734");
 	}
 }

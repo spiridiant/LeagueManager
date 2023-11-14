@@ -233,4 +233,8 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
     }
+
+    public void updateContract() {
+
+    }
 }
