@@ -1,17 +1,26 @@
 DROP TABLE Signed_Contract;
 DROP TABLE Player_Plays_for_Team;
+DROP TABLE Sponsor_Sponsors_Team;
+DROP TABLE Sponsor;
+DROP TABLE Works_For;
+DROP TABLE Staff;
+DROP TABLE Doctor;
+DROP table Manager;
+DROP TABLE Coach;
+DROP TABLE Trainer;
+
+
 DROP TABLE Team;
 DROP TABLE Division;
 
 
 
-
--- CREATE TABLE Sponsor
--- (
---     SID    INTEGER PRIMARY KEY,
---     Name   VARCHAR2 (50) NOT NULL,
---     Slogan VARCHAR2 (100)
--- );
+CREATE TABLE Sponsor
+(
+    SID    INTEGER PRIMARY KEY,
+    Name   VARCHAR2 (50) NOT NULL,
+    Slogan VARCHAR2 (100)
+);
 --
 CREATE TABLE Division
 (
@@ -66,36 +75,36 @@ CREATE TABLE Team
 --         REFERENCES League (Name)
 -- );
 --
--- CREATE TABLE Staff
--- (
---     StID   INTEGER PRIMARY KEY,
---     Name   VARCHAR2 (50) NOT NULL,
---     Salary INTEGER
--- );
+CREATE TABLE Staff
+(
+    StID   INTEGER PRIMARY KEY,
+    Name   VARCHAR2 (50) NOT NULL,
+    Salary INTEGER
+);
 --
--- CREATE TABLE Doctor
--- (
---     StID  INTEGER PRIMARY KEY,
---     Field VARCHAR2 (50)
--- );
---
--- CREATE TABLE Coach
--- (
---     StID            INTEGER PRIMARY KEY,
---     number_of_rings INTEGER
--- );
---
--- CREATE TABLE Trainer
--- (
---     StID      INTEGER PRIMARY KEY,
---     Specialty VARCHAR2 (50)
--- );
---
--- CREATE TABLE Manager
--- (
---     StID                INTEGER PRIMARY KEY,
---     Years_of_Experience INTEGER
--- );
+CREATE TABLE Doctor
+(
+    StID  INTEGER PRIMARY KEY,
+    Field VARCHAR2 (50)
+);
+
+CREATE TABLE Coach
+(
+    StID            INTEGER PRIMARY KEY,
+    number_of_rings INTEGER
+);
+
+CREATE TABLE Trainer
+(
+    StID      INTEGER PRIMARY KEY,
+    Specialty VARCHAR2 (50)
+);
+
+CREATE TABLE Manager
+(
+    StID                INTEGER PRIMARY KEY,
+    Years_of_Experience INTEGER
+);
 
 CREATE TABLE Player_Plays_for_Team
 (
@@ -126,27 +135,27 @@ CREATE TABLE Signed_Contract
 --         ON UPDATE CASCADE
 );
 
+
+CREATE TABLE Sponsor_Sponsors_Team
+(
+    Sponsored_Amount INTEGER,
+    SID              INTEGER,
+    TName            VARCHAR2 (50),
+    City             VARCHAR2 (50),
+    PRIMARY KEY (TName, City, SID),
+        FOREIGN KEY (SID) REFERENCES Sponsor (SID),
+        FOREIGN KEY (TName, City) REFERENCES Team (TName, City)
+);
 --
--- CREATE TABLE Sponsor_Sponsors_Team
--- (
---     Sponsored_Amount INTEGER,
---     SID              INTEGER,
---     TName            VARCHAR2 (50),
---     City             VARCHAR2 (50),
---     PRIMARY KEY (TName, City, SID),
---         FOREIGN KEY (SID) REFERENCES Sponsor (SID),
---         FOREIGN KEY (TName, City) REFERENCES Team (TName, City)
--- );
---
--- CREATE TABLE Works_For
--- (
---     StID  INTEGER,
---     TName VARCHAR2 (50),
---     City  VARCHAR2 (50),
---     PRIMARY KEY (StID, TName, City),
---         FOREIGN KEY (StID) REFERENCES Staff (StID),
---         FOREIGN KEY (TName, City) REFERENCES Team (TName, City)
--- );
+CREATE TABLE Works_For
+(
+    StID  INTEGER,
+    TName VARCHAR2 (50),
+    City  VARCHAR2 (50),
+    PRIMARY KEY (StID, TName, City),
+        FOREIGN KEY (StID) REFERENCES Staff (StID),
+        FOREIGN KEY (TName, City) REFERENCES Team (TName, City)
+);
 --
 -- CREATE TABLE Team_Plays_Team
 -- (
@@ -183,24 +192,6 @@ CREATE TABLE Signed_Contract
 --     FOREIGN KEY (TName, City) REFERENCES Team (TName, City)
 -- );
 
-
--- -- Sponsor table
--- INSERT INTO Sponsor
--- VALUES (1, 'EcoFusion Solutions', 'Harmony in Every Innovation – Where Green Meets Ingenuity');
---
--- INSERT INTO Sponsor
--- VALUES (2, 'Quantum Quench Beverages', 'Taste the Future, One Quantum Leap at a Time!');
---
--- INSERT INTO Sponsor
--- VALUES (3, 'Galactic Gearworks', 'Universe''s Finest Creations, Engineered for the Stars!');
---
--- INSERT INTO Sponsor
--- VALUES (4, 'Paws & Play Pet Resorts', 'Where Tails Wag and Whiskers Purr – Your Pet''s Paradise!');
---
--- INSERT INTO Sponsor
--- VALUES (5, 'InfiniTech Labs', 'Limitless Possibilities, Crafted in Every Code!');
-
-
 -- Division table
 INSERT INTO Division VALUES ('Atlantic', 'Eastern');
 INSERT INTO Division VALUES ('Central', 'Eastern');
@@ -215,7 +206,40 @@ INSERT INTO Team VALUES ('Indiana Pacers', 136123345, 'Gainbridge Fieldhouse', '
 INSERT INTO Team VALUES ('Oklahoma City Thunder', 123123123, 'Paycom Center', 'Oklahoma City', 'Southwest');
 INSERT INTO Team VALUES ('Los Angeles Lakers', 139242132, 'Crypto Arena', 'Los Angeles', 'Pacific');
 INSERT INTO Team VALUES ('Los Angeles Clippers', 139242134, 'Crypto Arena', 'Los Angeles', 'Pacific');
---
+
+-- -- Sponsor table
+INSERT INTO Sponsor
+VALUES (1, 'EcoFusion Solutions', 'Harmony in Every Innovation – Where Green Meets Ingenuity');
+
+INSERT INTO Sponsor
+VALUES (2, 'Quantum Quench Beverages', 'Taste the Future, One Quantum Leap at a Time!');
+
+INSERT INTO Sponsor
+VALUES (3, 'Galactic Gearworks', 'Universe''s Finest Creations, Engineered for the Stars!');
+
+INSERT INTO Sponsor
+VALUES (4, 'Paws & Play Pet Resorts', 'Where Tails Wag and Whiskers Purr – Your Pet''s Paradise!');
+
+INSERT INTO Sponsor
+VALUES (5, 'InfiniTech Labs', 'Limitless Possibilities, Crafted in Every Code!');
+
+-- Sponsor Sponsors Team
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (123, 1, 'Toronto Raptors', 'Toronto');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (123, 2, 'Indiana Pacers', 'Indiana');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (123, 3, 'Oklahoma City Thunder', 'Oklahoma City');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (123, 4, 'Los Angeles Lakers', 'Los Angeles');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (123, 5, 'Los Angeles Clippers', 'Los Angeles');
+
+
 -- -- League table
 -- INSERT INTO League VALUES ('NBA', 1234000123, 'Adam Silver');
 -- INSERT INTO League VALUES ('WNBA', 123400012, 'Cathy Engelbert');
@@ -245,68 +269,61 @@ INSERT INTO Team VALUES ('Los Angeles Clippers', 139242134, 'Crypto Arena', 'Los
 -- INSERT INTO Season VALUES ('2022-08-29', 'NBA', '2023-06-21');
 --
 -- -- Staff table
--- INSERT INTO Staff VALUES (1, 'John Smith', 50000);
--- INSERT INTO Staff VALUES (2, 'Jane Doe', 55000);
--- INSERT INTO Staff VALUES (3, 'Michael Johnson', 60000);
--- INSERT INTO Staff VALUES (4, 'Emily Davis', 48000);
+INSERT INTO Staff VALUES (1, 'John Smith', 50000);
+INSERT INTO Staff VALUES (2, 'Jane Doe', 55000);
+INSERT INTO Staff VALUES (3, 'Michael Johnson', 60000);
+INSERT INTO Staff VALUES (4, 'Emily Davis', 48000);
 -- INSERT INTO Staff VALUES (5, 'Christopher Lee', 52000);
---
--- -- Doctor table
--- INSERT INTO Doctor VALUES (1, 'Cardiology');
+
+-- Doctor table
+INSERT INTO Doctor VALUES (1, 'Cardiology');
 -- INSERT INTO Doctor VALUES (2, 'Pediatrics');
 -- INSERT INTO Doctor VALUES (3, 'Neurology');
 -- INSERT INTO Doctor VALUES (4, 'Orthopedics');
 -- INSERT INTO Doctor VALUES (5, 'Psychiatry');
---
---
--- -- Coach table
--- INSERT INTO Coach VALUES (1, 3);
+
+-- Coach table
+INSERT INTO Coach VALUES (2, 3);
 -- INSERT INTO Coach VALUES (2, 5);
 -- INSERT INTO Coach VALUES (3, 2);
 -- INSERT INTO Coach VALUES (4, 4);
 -- INSERT INTO Coach VALUES (5, 6);
 --
--- -- Trainer table
--- INSERT INTO Trainer VALUES (1, 'Strength and Conditioning');
+-- Trainer table
+INSERT INTO Trainer VALUES (3, 'Strength and Conditioning');
 -- INSERT INTO Trainer VALUES (2, 'Sports Rehabilitation');
 -- INSERT INTO Trainer VALUES (3, 'Nutrition and Dietetics');
 -- INSERT INTO Trainer VALUES (4, 'Yoga and Flexibility');
 -- INSERT INTO Trainer VALUES (5, 'High-Intensity Interval Training');
---
--- -- Manager table
--- INSERT INTO Manager VALUES (1, 15);
+
+-- Manager table
+INSERT INTO Manager VALUES (4, 15);
 -- INSERT INTO Manager VALUES (2, 12);
 -- INSERT INTO Manager VALUES (3, 20);
 -- INSERT INTO Manager VALUES (4, 18);
 -- INSERT INTO Manager VALUES (5, 22);
+
+-- Works for Table
+INSERT INTO Works_For VALUES (1, 'Toronto Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (2, 'Toronto Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (3, 'Toronto Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (4, 'Toronto Raptors', 'Toronto');
+
 
 -- Player_Plays_For_Team table
 -- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2018-06-21', 'YYYY-MM-DD'), TO_DATE('1999-02-28', 'YYYY-MM-DD'), 201, 'Luka Doncic', 77, 2473875, 'Mavericks', 'Dallas');
 -- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2015-06-25', 'YYYY-MM-DD'), TO_DATE('1993-03-14', 'YYYY-MM-DD'), 203, 'Stephen Curry', 30, 1729634, 'Warriors', 'Golden State');
 INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2014-06-26', 'YYYY-MM-DD'), TO_DATE('1988-12-30', 'YYYY-MM-DD'), 206, 'LeBron James', 23, 1248756, 'Los Angeles Lakers', 'Los Angeles');
 INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), TO_DATE('1989-03-29', 'YYYY-MM-DD'), 201, 'Anthony Davis', 3, 1342351, 'Los Angeles Lakers', 'Los Angeles');
--- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Bucks', 'Milwaukee');
+-- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Milwaukee Bucks', 'Milwaukee');
 
 -- Signed_Contract table
--- INSERT INTO Signed_Contract VALUES (50000, 1, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
+-- INSERT INTO Signed_Contract VALUES (50000, 1248754, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
 -- INSERT INTO Signed_Contract VALUES (60000, 2, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
 INSERT INTO Signed_Contract VALUES (70000, 1248756, 6, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
 INSERT INTO Signed_Contract VALUES (55000, 1342351, 3, 700000, TO_DATE('2023-10-25', 'YYYY-MM-DD'), 4);
--- INSERT INTO Signed_Contract VALUES (65000, 5, 7, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
+-- INSERT INTO Signed_Contract VALUES (65000, 1534897, 7, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
 
--- -- Sponsor_Sponsors_Team table
--- INSERT INTO Sponsor_Sponsors_Team VALUES (872913, 37, 'Bucks', 'Milwaukee');
--- INSERT INTO Sponsor_Sponsors_Team VALUES (561024, 19, 'Knicks', 'New York');
--- INSERT INTO Sponsor_Sponsors_Team VALUES (315789, 25, 'Clippers', 'Los Angeles');
--- INSERT INTO Sponsor_Sponsors_Team VALUES (999999, 12, 'Heat', 'Miami');
--- INSERT INTO Sponsor_Sponsors_Team VALUES (746821, 30, 'Suns', 'Phoenix');
---
--- -- Works_For table
--- INSERT INTO Works_For VALUES (1, 'Bulls', 'Chicago');
--- INSERT INTO Works_For VALUES (7, 'Lakers', 'Los Angeles');
--- INSERT INTO Works_For VALUES (22, 'Celtics', 'Boston');
--- INSERT INTO Works_For VALUES (11, 'Raptors', 'Toronto');
--- INSERT INTO Works_For VALUES (4, 'Nuggets', 'Denver');
 --
 -- -- Team_Plays_Team table
 -- INSERT INTO Team_Plays_Team VALUES ('Bulls', 'Chicago', 'Hornets', 'Charlotte', '2022-03-26', 'United Center');
