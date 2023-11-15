@@ -49,5 +49,4 @@ public class TerminalWindow extends JFrame {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
     }
-
 }
