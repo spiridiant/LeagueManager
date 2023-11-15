@@ -3,6 +3,7 @@ package main.controller;
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
+import main.model.Contract;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
@@ -36,7 +37,7 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
 //            TerminalTransactions transaction = new TerminalTransactions();
 //            transaction.setupDatabase(this);
 //            transaction.showMainMenu(this);
-            new TerminalWindow();
+            new TerminalWindow(this);
         } else {
             loginWindow.handleLoginFailed();
 
@@ -53,6 +54,11 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
         leagueManager.start();
     }
 
+    @Override
+    public Contract[] getContractInfo() {
+        return dbHandler.getContractInfo();
+    }
+
     /**
      * TerminalOperationDelegate Implementation
      *
@@ -64,7 +70,9 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     }
 
     @Override
-    public void updateContract() {
-        dbHandler.updateContract();
+    public boolean updateContract(int id, int newBonus, int newLength) {
+        return dbHandler.updateContract(id, newBonus, newLength);
     }
+
+
 }

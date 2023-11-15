@@ -1,20 +1,3 @@
-DROP TABLE Signed_Contract;
-DROP TABLE Player_Plays_for_Team;
-DROP TABLE Sponsor_Sponsors_Team;
-DROP TABLE Sponsor;
-DROP TABLE Works_For;
-DROP TABLE Staff;
-DROP TABLE Doctor;
-DROP table Manager;
-DROP TABLE Coach;
-DROP TABLE Trainer;
-
-
-DROP TABLE Team;
-DROP TABLE Division;
-
-
-
 CREATE TABLE Sponsor
 (
     SID    INTEGER PRIMARY KEY,
@@ -320,9 +303,9 @@ INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), T
 -- Signed_Contract table
 -- INSERT INTO Signed_Contract VALUES (50000, 1248754, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
 -- INSERT INTO Signed_Contract VALUES (60000, 2, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
-INSERT INTO Signed_Contract VALUES (70000, 1248756, 6, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
+INSERT INTO Signed_Contract VALUES (70000, 1248756, 5, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
 INSERT INTO Signed_Contract VALUES (55000, 1342351, 3, 700000, TO_DATE('2023-10-25', 'YYYY-MM-DD'), 4);
--- INSERT INTO Signed_Contract VALUES (65000, 1534897, 7, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
+-- INSERT INTO Signed_Contract VALUES (65000, 1534897, 3, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
 
 --
 -- -- Team_Plays_Team table

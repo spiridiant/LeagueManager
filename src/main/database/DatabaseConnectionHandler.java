@@ -1,5 +1,6 @@
 package main.database;
 
+import main.model.Contract;
 import main.util.PrintablePreparedStatement;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -9,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 /**
@@ -159,6 +162,33 @@ public class DatabaseConnectionHandler {
         }
     }
 
+    public Contract[] getContractInfo() {
+        ArrayList<Contract> result = new ArrayList<Contract>();
+
+        try {
+            String query = "SELECT * FROM signed_contract";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Contract model = new Contract(rs.getInt("bonus"),
+                        rs.getInt("pid"),
+                        rs.getInt("length"),
+                        rs.getInt("value"),
+                        rs.getObject("signed_date", LocalDateTime.class),
+                        rs.getInt("cid"));
+                result.add(model);
+                System.out.println(model);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new Contract[result.size()]);
+    }
+
     private void rollbackConnection() {
         try {
             connection.rollback();
@@ -187,6 +217,8 @@ public class DatabaseConnectionHandler {
 
 //        dropTablesIfExists();
         ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner.setStopOnError(false);
+        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/dropTables.sql"));
         scriptRunner.setStopOnError(true);
         scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
 
@@ -234,7 +266,26 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public void updateContract() {
+    public boolean updateContract(int id, int newBonus, int newLength) {
+        try {
+            String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE cid = ?";
 
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ps.setInt(1, newBonus);
+            ps.setInt(2, newLength);
+            ps.setInt(3, id);
+            System.out.println(query);
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+                System.out.println(WARNING_TAG + " Contract " + id + " does not exist!");
+            }
+            connection.commit();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+            return false;
+        }
+        return true;
     }
 }
