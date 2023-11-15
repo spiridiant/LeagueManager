@@ -1,15 +1,19 @@
 package main.ui;
 
+import main.delegates.TerminalOperationDelegate;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
-public class LeagueManager extends JFrame {
+public class TerminalWindow extends JFrame {
 
     private JPanel leagueManager;
+    private TerminalOperationDelegate delegate;
 
-    public LeagueManager() {
+    public TerminalWindow(TerminalOperationDelegate delegate) {
         super("Basketball League Manager");
+        this.delegate = delegate;
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
         setResizable(false);
@@ -27,7 +31,7 @@ public class LeagueManager extends JFrame {
         DeletePanel deletePanel = new DeletePanel(cl, leagueManager);
         leagueManager.add(deletePanel, "delete");
 
-        UpdatePanel updatePanel = new UpdatePanel(cl, leagueManager);
+        UpdatePanel updatePanel = new UpdatePanel(cl, leagueManager, delegate);
         leagueManager.add(updatePanel, "update");
 
         cl.show(leagueManager, "menu");
@@ -44,13 +48,6 @@ public class LeagueManager extends JFrame {
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
-    }
-
-    /**
-     * EFFECT:      Start the program
-     */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        new LeagueManager();
     }
 
 }

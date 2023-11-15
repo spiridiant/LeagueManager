@@ -1,5 +1,8 @@
 package main.ui;
 
+import main.delegates.TerminalOperationDelegate;
+import main.model.Contract;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,21 +10,139 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class UpdatePanel extends JPanel {
-    private static final int PANEL_WIDTH = 1600;
-    private static final int PANEL_HEIGHT = 900;
+    private static final int PANEL_WIDTH = 1080;
+    private static final int PANEL_HEIGHT = 720;
 
-    public UpdatePanel(CardLayout cl, JPanel leagueManager) {
+    private TerminalOperationDelegate delegate;
+    private CardLayout cl;
+    private JPanel leagueManager;
+
+//    private JList<Contract> contracts;
+
+    private JTextField contractLength;
+    private JPanel operationPanel;
+    private JTextField contractBonus;
+    private Contract selectedContract;
+
+
+    public UpdatePanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
+        this.delegate = delegate;
+        this.cl = cl;
+        this.leagueManager = leagueManager;
+
+        setLayout(new BorderLayout());
+        setElements();
+
+    }
+
+
+    private void setElements() {
+        removeAll();
+        makeBackMenuButton();
+        makeCenterPanel();
+        makeUpdateButton();
+    }
+
+    public void makeBackMenuButton() {
         JButton back = new JButton("Back to the Menu");
         back.addActionListener(e -> cl.show(leagueManager, "menu"));
+        add(back, BorderLayout.NORTH);
+    }
 
-        JLabel title = new JLabel("do update here");
+    public void makeUpdateButton() {
+        JButton updateButton = new JButton("Update Contract");
+        updateButton.addActionListener((ActionEvent e) -> {
+            if(selectedContract != null){
+                String length = contractLength.getText();
+                int newLength = 0;
+                try {
+                    newLength = Integer.parseInt(length);
+                    if(newLength <= 0 || newLength > 5) {
+                        throw new NumberFormatException();
+                    }
+                    String bonus = contractBonus.getText();
+                    int newBonus = 0;
+                    try {
+                        newBonus = Integer.parseInt(bonus);
+                        if(newBonus < 0 || newBonus > 75000) {
+                            throw new NumberFormatException();
+                        }
+                        int id = selectedContract.getID();
+                        boolean updated = delegate.updateContract(id, newBonus, newLength);
+                        if(updated) {
+                            JOptionPane.showMessageDialog(this, "Contract " + id +  " updated.");
 
-        add(title);
-        add(back);
+                            setElements();
+                            revalidate();
+                            repaint();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Unable to update contract.");
+                        }
+                    } catch (NumberFormatException numE) {
+                        JOptionPane.showMessageDialog(this, "Invalid Bonus amount, bonus needs to be an integer >= 0 and <= 75,000");
+                    }
+                } catch (NumberFormatException numE) {
+                    JOptionPane.showMessageDialog(this, "Invalid contract length, contract length needs to be an integer > 0 and <= 5");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No contract selected.");
+            }
+        });
+        add(updateButton, BorderLayout.SOUTH);
+    }
 
-        JTextField contractLength = new JTextField("Enter the new contract length here");
+    public void makeCenterPanel() {
+        JPanel centerPanel = new JPanel();
+        makeContractPanel(centerPanel);
+        add(centerPanel, BorderLayout.CENTER);
+    }
+
+    public void makeContractPanel(JPanel centerPanel) {
+        Contract[] contractsArray = delegate.getContractInfo();
+        DefaultListModel<Contract> listModel = new DefaultListModel<>();
+        for(Contract contract : contractsArray) {
+            listModel.addElement(contract);
+        }
+        JList<Contract> contracts = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(contracts);
+        scrollPane.setPreferredSize(new Dimension(600, 300));
+
+
+        JButton select = new JButton("Select Contract");
+        select.addActionListener((ActionEvent e) -> {
+            selectedContract = contracts.getSelectedValue();
+            if (selectedContract != null) {
+                if(operationPanel != null) {
+                    centerPanel.remove(operationPanel);
+                }
+                makeOperationPane(selectedContract.getBonus(), selectedContract.getLength());
+                centerPanel.add(operationPanel);
+                revalidate();
+                repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "No contract selected.");
+            }
+        });
+
+        JPanel contractSelectPanel = new JPanel();
+        contractSelectPanel.setPreferredSize(new Dimension(600, 450));
+        contractSelectPanel.setLayout(new BoxLayout(contractSelectPanel, BoxLayout.Y_AXIS));
+        contractSelectPanel.add(scrollPane);
+        contractSelectPanel.add(select);
+        centerPanel.add(contractSelectPanel);
+    }
+
+    public void makeOperationPane(int curr_bonus, int curr_length) {
+        operationPanel = new JPanel();
+        operationPanel.setLayout(new GridLayout(2, 2));
+        operationPanel.setPreferredSize(new Dimension(200, 60));
+
+        JLabel lengthLabel = new JLabel("Contract length");
+        JLabel bonusLabel = new JLabel("Bonus");
+
+        contractLength = new JTextField(Integer.toString(curr_length));
         contractLength.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 JTextField source = (JTextField)e.getComponent();
@@ -29,32 +150,19 @@ public class UpdatePanel extends JPanel {
                 source.removeFocusListener(this);
             }
         });
-        contractLength.setPreferredSize(new Dimension(200,30));
-        JButton updateContractLengthButton = new JButton("update contract length");
-        updateContractLengthButton.addActionListener((ActionEvent e) -> {
-            String newLength = contractLength.getText();
-
-        });
-
-        JTextField bonus = new JTextField("Enter the new bonus amount here");
-        bonus.addFocusListener(new FocusAdapter() {
+        contractLength.setPreferredSize(new Dimension(100,30));
+        contractBonus = new JTextField(Integer.toString(curr_bonus));
+        contractBonus.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 JTextField source = (JTextField)e.getComponent();
                 source.setText("");
                 source.removeFocusListener(this);
             }
         });
-        bonus.setPreferredSize(new Dimension(200,30));
-        JButton updateBonusButton = new JButton("update contract length");
-        updateBonusButton.addActionListener((ActionEvent e) -> {
-            String newBonus = contractLength.getText();
-
-        });
-
-        add(contractLength);
-        add(updateContractLengthButton);
-
-        add(bonus);
-        add(updateBonusButton);
+        contractBonus.setPreferredSize(new Dimension(100,30));
+        operationPanel.add(lengthLabel);
+        operationPanel.add(bonusLabel);
+        operationPanel.add(contractLength);
+        operationPanel.add(contractBonus);
     }
 }
