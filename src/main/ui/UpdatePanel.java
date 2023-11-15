@@ -4,6 +4,7 @@ import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
@@ -99,19 +100,33 @@ public class UpdatePanel extends JPanel {
 
     public void makeContractPanel(JPanel centerPanel) {
         Contract[] contractsArray = delegate.getContractInfo();
-        DefaultListModel<Contract> listModel = new DefaultListModel<>();
+//        DefaultListModel<Contract> listModel = new DefaultListModel<>();
+//        for(Contract contract : contractsArray) {
+//            listModel.addElement(contract);
+//        }
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("ID");
+        tableModel.addColumn("Bonus");
+        tableModel.addColumn("Player ID");
+        tableModel.addColumn("Length");
+        tableModel.addColumn("Value");
+        tableModel.addColumn("Signed Date");
+
         for(Contract contract : contractsArray) {
-            listModel.addElement(contract);
+            Object[] rowData = {contract.getID(), contract.getBonus(),contract.getPid(), contract.getLength(), contract.getValue(), contract.getSignedDate()};
+            tableModel.addRow(rowData);
         }
-        JList<Contract> contracts = new JList<>(listModel);
-        JScrollPane scrollPane = new JScrollPane(contracts);
+
+        JTable contractTable = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(contractTable);
         scrollPane.setPreferredSize(new Dimension(600, 300));
 
 
         JButton select = new JButton("Select Contract");
         select.addActionListener((ActionEvent e) -> {
-            selectedContract = contracts.getSelectedValue();
-            if (selectedContract != null) {
+            int selectedRow = contractTable.getSelectedRow();
+            if (selectedRow != -1) {
+                selectedContract = getContractFromSelectedRow(contractTable, selectedRow);
                 if(operationPanel != null) {
                     centerPanel.remove(operationPanel);
                 }
@@ -130,6 +145,16 @@ public class UpdatePanel extends JPanel {
         contractSelectPanel.add(scrollPane);
         contractSelectPanel.add(select);
         centerPanel.add(contractSelectPanel);
+    }
+
+    private Contract getContractFromSelectedRow(JTable table, int selectedRow) {
+        int id = (int) table.getValueAt(selectedRow, 0);
+
+        int bonus = (int) table.getValueAt(selectedRow, 1);
+        int pid = (int) table.getValueAt(selectedRow, 2);
+        int length = (int) table.getValueAt(selectedRow, 3);
+        int value = (int)table.getValueAt(selectedRow, 4);
+        return new Contract(id, bonus, pid, length, value);
     }
 
     public void makeOperationPane(int curr_bonus, int curr_length) {

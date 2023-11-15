@@ -88,7 +88,6 @@ public class DatabaseConnectionHandler {
                         rs.getObject("signed_date", LocalDateTime.class),
                         rs.getInt("cid"));
                 result.add(model);
-                System.out.println(model);
             }
             rs.close();
             ps.close();

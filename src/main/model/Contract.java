@@ -9,6 +9,9 @@ public class Contract {
     private int length;
     private int value;
     private LocalDateTime signedDate;
+
+
+
     private int cid;
     public Contract(int bonus, int pid, int length, int value, LocalDateTime signedDate, int cid) {
         this.bonus = bonus;
@@ -16,6 +19,14 @@ public class Contract {
         this.length = length;
         this.value = value;
         this.signedDate = signedDate;
+        this.cid = cid;
+    }
+
+    public Contract(int cid, int bonus, int pid, int length, int value) {
+        this.bonus = bonus;
+        this.pid = pid;
+        this.length = length;
+        this.value = value;
         this.cid = cid;
     }
 
@@ -39,5 +50,16 @@ public class Contract {
 
     public int getLength() {
         return length;
+    }
+    public int getPid() {
+        return pid;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getSignedDate() {
+        return signedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }
