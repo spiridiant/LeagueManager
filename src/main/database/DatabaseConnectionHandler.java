@@ -106,7 +106,6 @@ public class DatabaseConnectionHandler {
             ps.setInt(1, newBonus);
             ps.setInt(2, newLength);
             ps.setInt(3, id);
-            System.out.println(query);
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
                 System.out.println(WARNING_TAG + " Contract " + id + " does not exist!");
@@ -125,19 +124,18 @@ public class DatabaseConnectionHandler {
         ArrayList<TeamStaff> result = new ArrayList<>();
 
         try {
-            String query = "SELECT t.TName, t.City, s.Name, s.Salary " +
-                            "FROM Team t, Staff s, Works_For w" +
-                            "WHERE s.Salary >= ? AND s.StID = w.StID AND w.TName = t.TName AND w.City = t.City";
+            String query = "SELECT t.tname, t.city, s.name, s.salary " +
+                            "FROM team t, staff s, works_for w " +
+                            "WHERE s.salary >= ? AND s.stid = w.stid AND w.tname = t.tname AND w.city = t.city";
             PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ps.setInt(1, salary);
             ResultSet rs = ps.executeQuery();
-
             while(rs.next()) {
                 TeamStaff model = new TeamStaff(rs.getString("TName"),
                         rs.getString("City"),
                         rs.getString("Name"),
                         rs.getInt("Salary"));
                 result.add(model);
-                System.out.println(model);
             }
             rs.close();
             ps.close();
@@ -162,8 +160,6 @@ public class DatabaseConnectionHandler {
         scriptRunner.runScript(new FileReader("./src/main/sql_scripts/dropTables.sql"));
         scriptRunner.setStopOnError(true);
         scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
-
-
     }
 
 

@@ -151,10 +151,8 @@ public class UpdatePanel extends JPanel {
         int id = (int) table.getValueAt(selectedRow, 0);
 
         int bonus = (int) table.getValueAt(selectedRow, 1);
-        int pid = (int) table.getValueAt(selectedRow, 2);
         int length = (int) table.getValueAt(selectedRow, 3);
-        int value = (int)table.getValueAt(selectedRow, 4);
-        return new Contract(id, bonus, pid, length, value);
+        return new Contract(id, bonus, length);
     }
 
     public void makeOperationPane(int curr_bonus, int curr_length) {

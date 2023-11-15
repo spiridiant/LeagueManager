@@ -11,4 +11,20 @@ public class TeamStaff {
         this.staffName = staffName;
         this.salary = salary;
     }
+
+    public String getTName() {
+        return TName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
 }

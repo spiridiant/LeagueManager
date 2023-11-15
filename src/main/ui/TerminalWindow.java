@@ -34,6 +34,9 @@ public class TerminalWindow extends JFrame {
         UpdatePanel updatePanel = new UpdatePanel(cl, leagueManager, delegate);
         leagueManager.add(updatePanel, "update");
 
+        JoinPanel joinPanel = new JoinPanel(cl, leagueManager, delegate);
+        leagueManager.add(joinPanel, "join");
+
         cl.show(leagueManager, "menu");
         add(leagueManager);
 

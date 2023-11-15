@@ -22,7 +22,7 @@ public class Contract {
         this.cid = cid;
     }
 
-    public Contract(int cid, int bonus, int pid, int length, int value) {
+    public Contract(int cid, int bonus, int length) {
         this.bonus = bonus;
         this.pid = pid;
         this.length = length;

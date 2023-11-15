@@ -10,22 +10,24 @@ public class MenuPanel extends JPanel  {
     public MenuPanel(CardLayout cl, JPanel leagueManager) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
+        JLabel title = new JLabel("Basketball League Management System");
+
         JButton insert = new JButton("insert");
         insert.addActionListener(e -> cl.show(leagueManager, "insert"));
-        add(insert);
 
         JButton delete = new JButton("delete");
         delete.addActionListener(e -> cl.show(leagueManager, "delete"));
-        add(delete);
 
         JButton update = new JButton("update");
         update.addActionListener(e -> cl.show(leagueManager, "update"));
 
-        JLabel title = new JLabel("Basketball League Management System");
+        JButton join = new JButton("join");
+        join.addActionListener(e -> cl.show(leagueManager, "join"));
 
         add(title);
         add(insert);
         add(delete);
         add(update);
+        add(join);
     }
 }

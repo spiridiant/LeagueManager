@@ -68,7 +68,7 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
      */
     @Override
     public void databaseSetup() throws FileNotFoundException {
-        dbHandler.databaseSetup();;
+//        dbHandler.databaseSetup();
     }
 
     @Override
