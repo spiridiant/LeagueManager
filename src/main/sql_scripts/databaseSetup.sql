@@ -184,11 +184,11 @@ INSERT INTO Division VALUES ('Southeast', 'Eastern');
 
 
 -- Team table
-INSERT INTO Team VALUES ('Toronto Raptors', 136000000, 'ScotiaBank Arena', 'Toronto', 'Atlantic');
-INSERT INTO Team VALUES ('Indiana Pacers', 136123345, 'Gainbridge Fieldhouse', 'Indiana', 'Central');
-INSERT INTO Team VALUES ('Oklahoma City Thunder', 123123123, 'Paycom Center', 'Oklahoma City', 'Southwest');
-INSERT INTO Team VALUES ('Los Angeles Lakers', 139242132, 'Crypto Arena', 'Los Angeles', 'Pacific');
-INSERT INTO Team VALUES ('Los Angeles Clippers', 139242134, 'Crypto Arena', 'Los Angeles', 'Pacific');
+INSERT INTO Team VALUES ('Raptors', 136000000, 'ScotiaBank Arena', 'Toronto', 'Atlantic');
+INSERT INTO Team VALUES ('Pacers', 136123345, 'Gainbridge Fieldhouse', 'Indiana', 'Central');
+INSERT INTO Team VALUES ('Thunder', 123123123, 'Paycom Center', 'Oklahoma City', 'Southwest');
+INSERT INTO Team VALUES ('Lakers', 139242132, 'Crypto Arena', 'Los Angeles', 'Pacific');
+INSERT INTO Team VALUES ('Clippers', 139242134, 'Crypto Arena', 'Los Angeles', 'Pacific');
 
 -- -- Sponsor table
 INSERT INTO Sponsor
@@ -208,19 +208,19 @@ VALUES (5, 'InfiniTech Labs', 'Limitless Possibilities, Crafted in Every Code!')
 
 -- Sponsor Sponsors Team
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 1, 'Toronto Raptors', 'Toronto');
+VALUES (123, 1, 'Raptors', 'Toronto');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 2, 'Indiana Pacers', 'Indiana');
+VALUES (123, 2, 'Pacers', 'Indiana');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 3, 'Oklahoma City Thunder', 'Oklahoma City');
+VALUES (123, 3, 'Thunder', 'Oklahoma City');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 4, 'Los Angeles Lakers', 'Los Angeles');
+VALUES (123, 4, 'Lakers', 'Los Angeles');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 5, 'Los Angeles Clippers', 'Los Angeles');
+VALUES (123, 5, 'Clippers', 'Los Angeles');
 
 
 -- -- League table
@@ -252,60 +252,96 @@ VALUES (123, 5, 'Los Angeles Clippers', 'Los Angeles');
 -- INSERT INTO Season VALUES ('2022-08-29', 'NBA', '2023-06-21');
 --
 -- -- Staff table
-INSERT INTO Staff VALUES (1, 'John Smith', 50000);
-INSERT INTO Staff VALUES (2, 'Jane Doe', 55000);
-INSERT INTO Staff VALUES (3, 'Michael Johnson', 60000);
+INSERT INTO Staff VALUES (1, 'Logan Martinez', 350000);
+INSERT INTO Staff VALUES (2, 'Grace Garcia', 250000);
+INSERT INTO Staff VALUES (3, 'Michael Johnson', 12000);
 INSERT INTO Staff VALUES (4, 'Emily Davis', 48000);
--- INSERT INTO Staff VALUES (5, 'Christopher Lee', 52000);
+INSERT INTO Staff VALUES (5, 'Christopher Lee', 52000);
+INSERT INTO Staff VALUES (6, 'Amanda Brown', 60000);
+INSERT INTO Staff VALUES (7, 'Daniel Wilson', 80000);
+INSERT INTO Staff VALUES (8, 'Olivia White', 45000);
+INSERT INTO Staff VALUES (9, 'Matthew Taylor', 70000);
+INSERT INTO Staff VALUES (10, 'Sophia Moore', 30000);
+INSERT INTO Staff VALUES (11, 'Ethan Anderson', 90000);
+INSERT INTO Staff VALUES (12, 'Isabella Garcia', 55000);
+INSERT INTO Staff VALUES (13, 'William Martinez', 42000);
+INSERT INTO Staff VALUES (14, 'Abigail Robinson', 48000);
+INSERT INTO Staff VALUES (15, 'James Hernandez', 75000);
+INSERT INTO Staff VALUES (16, 'Mia Smith', 38000);
+INSERT INTO Staff VALUES (17, 'Alexander Johnson', 92000);
+INSERT INTO Staff VALUES (18, 'Ava Davis', 32000);
+INSERT INTO Staff VALUES (19, 'Benjamin Brown', 88000);
+INSERT INTO Staff VALUES (20, 'Charlotte Wilson', 42000);
+
 
 -- Doctor table
 INSERT INTO Doctor VALUES (1, 'Cardiology');
--- INSERT INTO Doctor VALUES (2, 'Pediatrics');
--- INSERT INTO Doctor VALUES (3, 'Neurology');
--- INSERT INTO Doctor VALUES (4, 'Orthopedics');
--- INSERT INTO Doctor VALUES (5, 'Psychiatry');
+INSERT INTO Doctor VALUES (2, 'Pediatrics');
+INSERT INTO Doctor VALUES (3, 'Neurology');
+INSERT INTO Doctor VALUES (4, 'Orthopedics');
+INSERT INTO Doctor VALUES (5, 'Psychiatry');
 
 -- Coach table
-INSERT INTO Coach VALUES (2, 3);
--- INSERT INTO Coach VALUES (2, 5);
--- INSERT INTO Coach VALUES (3, 2);
--- INSERT INTO Coach VALUES (4, 4);
--- INSERT INTO Coach VALUES (5, 6);
+INSERT INTO Coach VALUES (6, 3);
+INSERT INTO Coach VALUES (7, 5);
+INSERT INTO Coach VALUES (8, 2);
+INSERT INTO Coach VALUES (9, 4);
+INSERT INTO Coach VALUES (10, 6);
 --
 -- Trainer table
-INSERT INTO Trainer VALUES (3, 'Strength and Conditioning');
--- INSERT INTO Trainer VALUES (2, 'Sports Rehabilitation');
--- INSERT INTO Trainer VALUES (3, 'Nutrition and Dietetics');
--- INSERT INTO Trainer VALUES (4, 'Yoga and Flexibility');
--- INSERT INTO Trainer VALUES (5, 'High-Intensity Interval Training');
+INSERT INTO Trainer VALUES (11, 'Strength and Conditioning');
+INSERT INTO Trainer VALUES (12, 'Sports Rehabilitation');
+INSERT INTO Trainer VALUES (13, 'Nutrition and Dietetics');
+INSERT INTO Trainer VALUES (14, 'Yoga and Flexibility');
+INSERT INTO Trainer VALUES (15, 'High-Intensity Interval Training');
 
 -- Manager table
-INSERT INTO Manager VALUES (4, 15);
--- INSERT INTO Manager VALUES (2, 12);
--- INSERT INTO Manager VALUES (3, 20);
--- INSERT INTO Manager VALUES (4, 18);
--- INSERT INTO Manager VALUES (5, 22);
+INSERT INTO Manager VALUES (16, 15);
+INSERT INTO Manager VALUES (17, 12);
+INSERT INTO Manager VALUES (18, 20);
+INSERT INTO Manager VALUES (19, 18);
+INSERT INTO Manager VALUES (20, 22);
 
 -- Works for Table
-INSERT INTO Works_For VALUES (1, 'Toronto Raptors', 'Toronto');
-INSERT INTO Works_For VALUES (2, 'Toronto Raptors', 'Toronto');
-INSERT INTO Works_For VALUES (3, 'Toronto Raptors', 'Toronto');
-INSERT INTO Works_For VALUES (4, 'Toronto Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (1, 'Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (2, 'Pacers', 'Indiana');
+INSERT INTO Works_For VALUES (3, 'Thunder', 'Oklahoma City');
+INSERT INTO Works_For VALUES (4, 'Lakers', 'Los Angeles');
+INSERT INTO Works_For VALUES (5, 'Clippers', 'Los Angeles');
+
+INSERT INTO Works_For VALUES (6, 'Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (7, 'Pacers', 'Indiana');
+INSERT INTO Works_For VALUES (8, 'Thunder', 'Oklahoma City');
+INSERT INTO Works_For VALUES (9, 'Lakers', 'Los Angeles');
+INSERT INTO Works_For VALUES (10, 'Clippers', 'Los Angeles');
+
+INSERT INTO Works_For VALUES (11, 'Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (12, 'Pacers', 'Indiana');
+INSERT INTO Works_For VALUES (13, 'Thunder', 'Oklahoma City');
+INSERT INTO Works_For VALUES (14, 'Lakers', 'Los Angeles');
+INSERT INTO Works_For VALUES (15, 'Clippers', 'Los Angeles');
+
+INSERT INTO Works_For VALUES (16, 'Raptors', 'Toronto');
+INSERT INTO Works_For VALUES (17, 'Pacers', 'Indiana');
+INSERT INTO Works_For VALUES (18, 'Thunder', 'Oklahoma City');
+INSERT INTO Works_For VALUES (19, 'Lakers', 'Los Angeles');
+INSERT INTO Works_For VALUES (20, 'Clippers', 'Los Angeles');
+
 
 
 -- Player_Plays_For_Team table
--- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2018-06-21', 'YYYY-MM-DD'), TO_DATE('1999-02-28', 'YYYY-MM-DD'), 201, 'Luka Doncic', 77, 2473875, 'Mavericks', 'Dallas');
--- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2015-06-25', 'YYYY-MM-DD'), TO_DATE('1993-03-14', 'YYYY-MM-DD'), 203, 'Stephen Curry', 30, 1729634, 'Warriors', 'Golden State');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2014-06-26', 'YYYY-MM-DD'), TO_DATE('1988-12-30', 'YYYY-MM-DD'), 206, 'LeBron James', 23, 1248756, 'Los Angeles Lakers', 'Los Angeles');
-INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), TO_DATE('1989-03-29', 'YYYY-MM-DD'), 201, 'Anthony Davis', 3, 1342351, 'Los Angeles Lakers', 'Los Angeles');
--- INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Milwaukee Bucks', 'Milwaukee');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2018-06-21', 'YYYY-MM-DD'), TO_DATE('1999-02-28', 'YYYY-MM-DD'), 201, 'Luka Doncic', 77, 2473875, 'Raptors', 'Toronto');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2015-06-25', 'YYYY-MM-DD'), TO_DATE('1993-03-14', 'YYYY-MM-DD'), 203, 'Stephen Curry', 30, 1729634, 'Pacers', 'Indiana');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2014-06-26', 'YYYY-MM-DD'), TO_DATE('1988-12-30', 'YYYY-MM-DD'), 206, 'LeBron James', 23, 1248756, 'Lakers', 'Los Angeles');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2013-06-27', 'YYYY-MM-DD'), TO_DATE('1989-03-29', 'YYYY-MM-DD'), 201, 'Anthony Davis', 3, 1342351, 'Lakers', 'Los Angeles');
+INSERT INTO Player_Plays_For_Team VALUES (TO_DATE('2016-06-23', 'YYYY-MM-DD'), TO_DATE('1994-03-16', 'YYYY-MM-DD'), 193, 'Giannis Antetokounmpo', 34, 1534897, 'Thunder', 'Oklahoma City');
 
 -- Signed_Contract table
--- INSERT INTO Signed_Contract VALUES (50000, 1248754, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
--- INSERT INTO Signed_Contract VALUES (60000, 2, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
+INSERT INTO Signed_Contract VALUES (50000, 2473875, 5, 1000000, TO_DATE('2023-10-14', 'YYYY-MM-DD'), 1);
+INSERT INTO Signed_Contract VALUES (60000, 1729634, 4, 800000, TO_DATE('2023-10-28', 'YYYY-MM-DD'), 2);
 INSERT INTO Signed_Contract VALUES (70000, 1248756, 5, 1200000, TO_DATE('2023-10-06', 'YYYY-MM-DD'), 3);
 INSERT INTO Signed_Contract VALUES (55000, 1342351, 3, 700000, TO_DATE('2023-10-25', 'YYYY-MM-DD'), 4);
--- INSERT INTO Signed_Contract VALUES (65000, 1534897, 3, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
+INSERT INTO Signed_Contract VALUES (65000, 1534897, 3, 1500000, TO_DATE('2023-10-18', 'YYYY-MM-DD'), 5);
 
 --
 -- -- Team_Plays_Team table

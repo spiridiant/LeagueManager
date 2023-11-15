@@ -73,6 +73,4 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     public boolean updateContract(int id, int newBonus, int newLength) {
         return dbHandler.updateContract(id, newBonus, newLength);
     }
-
-
 }
