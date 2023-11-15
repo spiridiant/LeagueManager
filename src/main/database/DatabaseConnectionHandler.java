@@ -1,6 +1,7 @@
 package main.database;
 
 import main.model.Contract;
+import main.model.TeamStaff;
 import main.util.PrintablePreparedStatement;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -72,7 +73,7 @@ public class DatabaseConnectionHandler {
     }
 
     public Contract[] getContractInfo() {
-        ArrayList<Contract> result = new ArrayList<Contract>();
+        ArrayList<Contract> result = new ArrayList<>();
 
         try {
             String query = "SELECT * FROM signed_contract";
@@ -98,24 +99,6 @@ public class DatabaseConnectionHandler {
         return result.toArray(new Contract[result.size()]);
     }
 
-    private void rollbackConnection() {
-        try {
-            connection.rollback();
-        } catch (SQLException e) {
-            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-        }
-    }
-
-    public void databaseSetup() throws FileNotFoundException {
-        ScriptRunner scriptRunner = new ScriptRunner(connection);
-        scriptRunner.setStopOnError(false);
-        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/dropTables.sql"));
-        scriptRunner.setStopOnError(true);
-        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
-
-
-    }
-
     public boolean updateContract(int id, int newBonus, int newLength) {
         try {
             String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE cid = ?";
@@ -138,4 +121,51 @@ public class DatabaseConnectionHandler {
         }
         return true;
     }
+
+    public TeamStaff[] getTeamStaffInfo(int salary) {
+        ArrayList<TeamStaff> result = new ArrayList<>();
+
+        try {
+            String query = "SELECT t.TName, t.City, s.Name, s.Salary " +
+                            "FROM Team t, Staff s, Works_For w" +
+                            "WHERE s.Salary >= ? AND s.StID = w.StID AND w.TName = t.TName AND w.City = t.City";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                TeamStaff model = new TeamStaff(rs.getString("TName"),
+                        rs.getString("City"),
+                        rs.getString("Name"),
+                        rs.getInt("Salary"));
+                result.add(model);
+                System.out.println(model);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new TeamStaff[result.size()]);
+    }
+
+    private void rollbackConnection() {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+    }
+
+    public void databaseSetup() throws FileNotFoundException {
+        ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner.setStopOnError(false);
+        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/dropTables.sql"));
+        scriptRunner.setStopOnError(true);
+        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
+
+
+    }
+
+
 }

@@ -17,8 +17,6 @@ public class UpdatePanel extends JPanel {
     private CardLayout cl;
     private JPanel leagueManager;
 
-//    private JList<Contract> contracts;
-
     private JTextField contractLength;
     private JPanel operationPanel;
     private JTextField contractBonus;

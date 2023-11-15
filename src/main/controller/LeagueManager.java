@@ -4,6 +4,7 @@ import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
+import main.model.TeamStaff;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
@@ -65,6 +66,7 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
      * The TerminalTransaction instance tells us that the user is fine with dropping any existing table
      * called branch and creating a new one for this project to use
      */
+    @Override
     public void databaseSetup() throws FileNotFoundException {
         dbHandler.databaseSetup();;
     }
@@ -72,5 +74,10 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     @Override
     public boolean updateContract(int id, int newBonus, int newLength) {
         return dbHandler.updateContract(id, newBonus, newLength);
+    }
+
+    @Override
+    public TeamStaff[] getTeamStaffInfo(int salary) {
+        return dbHandler.getTeamStaffInfo(salary);
     }
 }
