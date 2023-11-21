@@ -9,6 +9,7 @@ public class InsertPanel extends JPanel {
 
     public InsertPanel(CardLayout cl, JPanel leagueManager) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setBackground(new Color(34, 34, 34));
 
         JButton back = new JButton("Back to the Menu");
         back.addActionListener(e -> cl.show(leagueManager, "menu"));
@@ -17,5 +18,9 @@ public class InsertPanel extends JPanel {
 
         add(title);
         add(back);
+    }
+
+    public void updateContent() {
+        return;
     }
 }
