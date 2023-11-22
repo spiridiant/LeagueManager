@@ -2,12 +2,16 @@ package main.ui;
 
 import main.delegates.LoginWindowDelegate;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * The class is only responsible for displaying and handling the login GUI. 
@@ -31,83 +35,104 @@ public class LoginWindow extends JFrame implements ActionListener {
 	}
 
 	public void showFrame(LoginWindowDelegate delegate) {
-		this.delegate = delegate;
-		loginAttempts = 0;
+        this.delegate = delegate;
+        loginAttempts = 0;
 
-		JLabel usernameLabel = new JLabel("Enter username: ");
-		JLabel passwordLabel = new JLabel("Enter password: ");
+        JLabel usernameLabel = new JLabel("Enter username: ");
+        JLabel passwordLabel = new JLabel("Enter password: ");
 
-		usernameField = new JTextField(TEXT_FIELD_WIDTH);
-		passwordField = new JPasswordField(TEXT_FIELD_WIDTH);
-		passwordField.setEchoChar('*');
+        usernameLabel.setForeground(Color.WHITE);
+        passwordLabel.setForeground(Color.WHITE);
 
-		JButton loginButton = new JButton("Log In");
+        usernameField = new JTextField(TEXT_FIELD_WIDTH);
+        passwordField = new JPasswordField(TEXT_FIELD_WIDTH);
+        passwordField.setEchoChar('*');
 
-		JPanel contentPane = new JPanel();
-		this.setContentPane(contentPane);
+        usernameField.setText("ora_CWLID");
 
-		// layout components using the GridBag layout manager
-		GridBagLayout gb = new GridBagLayout();
-		GridBagConstraints c = new GridBagConstraints();
+        JButton loginButton = new JButton("Log In");
 
-		contentPane.setLayout(gb);
-		contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel contentPane = new JPanel();
+        this.setContentPane(contentPane);
 
-		// place the username label 
-		c.gridwidth = GridBagConstraints.RELATIVE;
-		c.insets = new Insets(10, 10, 5, 0);
-		gb.setConstraints(usernameLabel, c);
-		contentPane.add(usernameLabel);
+        // layout components using the GridBag layout manager
+        GridBagLayout gb = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
 
-		// place the text field for the username 
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(10, 0, 5, 10);
-		gb.setConstraints(usernameField, c);
-		contentPane.add(usernameField);
+        contentPane.setLayout(gb);
+        contentPane.setBackground(new Color(34, 34, 34)); // Dark gray color
 
-		// place password label
-		c.gridwidth = GridBagConstraints.RELATIVE;
-		c.insets = new Insets(0, 10, 10, 0);
-		gb.setConstraints(passwordLabel, c);
-		contentPane.add(passwordLabel);
 
-		// place the password field 
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(0, 0, 10, 10);
-		gb.setConstraints(passwordField, c);
-		contentPane.add(passwordField);
+        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		// place the login button
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = new Insets(5, 10, 10, 10);
-		c.anchor = GridBagConstraints.CENTER;
-		gb.setConstraints(loginButton, c);
-		contentPane.add(loginButton);
+        JLabel logoLabel = null;
+        try {
+            BufferedImage logo = ImageIO.read(new File("Resources/Images/logo.png"));
+            logoLabel = new JLabel(new ImageIcon(logo));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
-		// register login button with action event handler
-		loginButton.addActionListener(this);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(10, 10, 20, 10);
+        gb.setConstraints(logoLabel, c);
+        contentPane.add(logoLabel);
 
-		// anonymous inner class for closing the window
-		this.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
+        // place the username label
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(10, 10, 5, 0);
+        gb.setConstraints(usernameLabel, c);
+        contentPane.add(usernameLabel);
 
-		// size the window to obtain a best fit for the components
-		this.pack();
+        // place the text field for the username
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(10, 0, 5, 10);
+        gb.setConstraints(usernameField, c);
+        contentPane.add(usernameField);
 
-		// center the frame
-		Dimension d = this.getToolkit().getScreenSize();
-		Rectangle r = this.getBounds();
-		this.setLocation( (d.width - r.width)/2, (d.height - r.height)/2 );
+        // place password label
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        c.insets = new Insets(0, 10, 10, 0);
+        gb.setConstraints(passwordLabel, c);
+        contentPane.add(passwordLabel);
 
-		// make the window visible
-		 this.setVisible(true);
+        // place the password field
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(0, 0, 10, 10);
+        gb.setConstraints(passwordField, c);
+        contentPane.add(passwordField);
 
-		// place the cursor in the text field for the username
-		usernameField.requestFocus();
-	}
+        // place the login button
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.insets = new Insets(5, 10, 10, 10);
+        c.anchor = GridBagConstraints.CENTER;
+        gb.setConstraints(loginButton, c);
+        contentPane.add(loginButton);
+
+        // register login button with action event handler
+        loginButton.addActionListener(this);
+
+        // anonymous inner class for closing the window
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+        // size the window to obtain a best fit for the components
+        this.pack();
+
+        // center the frame
+        Dimension d = this.getToolkit().getScreenSize();
+        Rectangle r = this.getBounds();
+        this.setLocation((d.width - r.width) / 2, (d.height - r.height) / 2);
+
+        // make the window visible
+        this.setVisible(true);
+
+        // place the cursor in the text field for the username
+        usernameField.requestFocus();
+    }
 	
 	public void handleLoginFailed() {
 		loginAttempts++;
@@ -124,5 +149,6 @@ public class LoginWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		delegate.login(usernameField.getText(), String.valueOf(passwordField.getPassword()));
+        //delegate.login("ora_kookevk", "a16389124");
 	}
 }

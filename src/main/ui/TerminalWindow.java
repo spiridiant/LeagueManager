@@ -28,7 +28,7 @@ public class TerminalWindow extends JFrame {
         InsertPanel insertPanel = new InsertPanel(cl, leagueManager);
         leagueManager.add(insertPanel, "insert");
 
-        DeletePanel deletePanel = new DeletePanel(cl, leagueManager);
+        DeletePanel deletePanel = new DeletePanel(cl, leagueManager, delegate);
         leagueManager.add(deletePanel, "delete");
 
         UpdatePanel updatePanel = new UpdatePanel(cl, leagueManager, delegate);
@@ -44,6 +44,7 @@ public class TerminalWindow extends JFrame {
         centreOnScreen();
         setVisible(true);
     }
+
 
     // Centres frame on desktop, from SpaceInvader
     // modifies: this

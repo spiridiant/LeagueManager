@@ -4,6 +4,7 @@ import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
+import main.model.Player;
 import main.model.TeamStaff;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
@@ -60,6 +61,9 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
         return dbHandler.getContractInfo();
     }
 
+    @Override
+    public Player[] getPlayerInfo() { return dbHandler.getPlayerInfo(); }
+
     /**
      * TerminalOperationDelegate Implementation
      *
@@ -74,6 +78,11 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     @Override
     public boolean updateContract(int id, int newBonus, int newLength) {
         return dbHandler.updateContract(id, newBonus, newLength);
+    }
+
+    @Override
+    public boolean deletePlayer(int pid) {
+        return dbHandler.deletePlayer(pid);
     }
 
     @Override

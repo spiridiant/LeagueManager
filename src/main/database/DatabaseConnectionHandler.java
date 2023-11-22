@@ -1,6 +1,7 @@
 package main.database;
 
 import main.model.Contract;
+import main.model.Player;
 import main.model.TeamStaff;
 import main.util.PrintablePreparedStatement;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -72,6 +73,114 @@ public class DatabaseConnectionHandler {
         }
     }
 
+    public Contract getPlayerContract(int pid) {
+
+
+        try {
+            String query = "SELECT * FROM signed_contract";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Contract model = new Contract(rs.getInt("bonus"),
+                        rs.getInt("pid"),
+                        rs.getInt("length"),
+                        rs.getInt("value"),
+                        rs.getObject("signed_date", LocalDateTime.class),
+                        rs.getInt("cid"));
+
+                if (model.getPid() == pid) return model;
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        Contract c = new Contract(-1, -1,-1, -1,LocalDateTime.of(2019, 03, 28, 14, 33, 48, 640000) ,-1);
+        return c;
+    }
+
+    public boolean deletePlayer(int pid) {
+        String query = "DELETE FROM Player_Plays_for_Team WHERE PID = ?";
+        String query2 = "DELETE FROM Signed_Contract WHERE PID = ?";
+        try {
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            PrintablePreparedStatement ps2 = new PrintablePreparedStatement(connection.prepareStatement(query2), query2, false);
+
+            connection.setAutoCommit(false);
+
+            ps.setInt(1, pid);
+            ps2.setInt(1, pid);
+
+            int rowsAffected2 = ps2.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0 && rowsAffected2 > 0) {
+                connection.commit();
+                System.out.println("Player and contract deleted successfully.");
+            } else {
+                connection.rollback();
+                System.out.println("Player not found or couldn't be deleted.");
+            }
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately in your application
+        }
+        return false;
+    }
+
+    public Player[] getPlayerInfo() {
+        ArrayList<Player> result = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Player_Plays_for_Team";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                LocalDateTime debut = rs.getObject("Debut_Year", LocalDateTime.class);
+                LocalDateTime dob = rs.getObject("Date_of_Birth", LocalDateTime.class);
+                int height = rs.getInt("Height");
+                String name = rs.getString("Name");
+                int jersey = rs.getInt("Jersey#");
+                int pid = rs.getInt("PID");
+                String team = rs.getString("TName");
+                String city = rs.getString("City");
+
+//                Player model = new Player(
+//                        rs.getObject("Debut_Year", LocalDateTime.class),
+//                        rs.getObject("Date_of_Birth", LocalDateTime.class),
+//                        rs.getInt("Height"),
+//                        rs.getString("Name"),
+//                        rs.getInt("Jersey#"),
+//                        rs.getInt("PID"),
+//                        rs.getString("TName"),
+//                        rs.getString("City"));
+
+
+                Player model = new Player(
+                        debut,
+                        dob,
+                        height,
+                        name,
+                        jersey,
+                        pid,
+                        team,
+                        city,
+                        getPlayerContract(pid));
+                result.add(model);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return result.toArray(new Player[result.size()]);
+    }
+
     public Contract[] getContractInfo() {
         ArrayList<Contract> result = new ArrayList<>();
 
@@ -100,6 +209,7 @@ public class DatabaseConnectionHandler {
 
     public boolean updateContract(int id, int newBonus, int newLength) {
         try {
+            //String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE pid = ?";
             String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE cid = ?";
 
             PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
