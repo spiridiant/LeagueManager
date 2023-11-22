@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class JoinPanel extends JPanel {
     private TerminalOperationDelegate delegate;
@@ -16,14 +18,24 @@ public class JoinPanel extends JPanel {
     private JScrollPane scrollPane;
     public JoinPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.delegate = delegate;
-        this.setBackground(new Color(34, 34, 34));
         this.cl = cl;
         this.leagueManager = leagueManager;
-        this.setBackground(new Color(34, 34, 34));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                setElements();
+            }
+        });
+    }
+
+    public void setElements() {
         makeBackMenuButton();
         makeOperationPanel();
         makeDisplayPanel(0);
+        revalidate();
+        repaint();
     }
 
     public void makeBackMenuButton() {
@@ -34,9 +46,7 @@ public class JoinPanel extends JPanel {
 
     public void makeOperationPanel() {
         JPanel operationPanel = new JPanel();
-        operationPanel.setBackground(new Color(34, 34, 34));
         JLabel title = new JLabel("Enter the lower end salary: ");
-        title.setForeground(Color.WHITE);
         JTextField salaryInput = new JTextField();
         salaryInput.setPreferredSize(new Dimension(100, 30));
         JButton filter = new JButton("Filter");
@@ -72,7 +82,6 @@ public class JoinPanel extends JPanel {
         }
         JTable staffTable = new JTable(tableModel);
         scrollPane = new JScrollPane(staffTable);
-        scrollPane.setBackground(new Color(34, 34, 34));
         scrollPane.setPreferredSize(new Dimension(500, 400));
         add(scrollPane);
     }

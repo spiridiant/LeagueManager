@@ -32,17 +32,11 @@ public class MenuPanel extends JPanel {
 
         JButton update = new JButton("update");
         update.addActionListener(e -> {
-            if (leagueManager.getComponent(3) instanceof UpdatePanel) {
-                ((UpdatePanel) leagueManager.getComponent(3)).updateContent();
-            }
             cl.show(leagueManager, "update");
         });
 
         JButton join = new JButton("join");
         join.addActionListener(e -> {
-//            if (leagueManager.getComponent(4) instanceof JoinPanel) {
-//                ((JoinPanel) leagueManager.getComponent(4)).updateContent();
-//            }
             cl.show(leagueManager, "join");
         });
 

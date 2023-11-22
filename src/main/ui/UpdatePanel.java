@@ -2,14 +2,11 @@ package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
-import main.model.Player;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 
 public class UpdatePanel extends JPanel {
     private static final int PANEL_WIDTH = 1080;
@@ -24,7 +21,7 @@ public class UpdatePanel extends JPanel {
     private JTextField contractBonus;
     private Contract selectedContract;
 
-    private DefaultTableModel tableModel;
+
     public UpdatePanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
@@ -32,11 +29,13 @@ public class UpdatePanel extends JPanel {
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
-
         setLayout(new BorderLayout());
-        setElements();
-
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent evt) {
+                setElements();
+            }
+        });
     }
 
 
@@ -45,6 +44,8 @@ public class UpdatePanel extends JPanel {
         makeBackMenuButton();
         makeCenterPanel();
         makeUpdateButton();
+        revalidate();
+        repaint();
     }
 
     public void makeBackMenuButton() {
@@ -71,20 +72,11 @@ public class UpdatePanel extends JPanel {
                         if(newBonus < 0 || newBonus > 75000) {
                             throw new NumberFormatException();
                         }
-                        //int id = selectedContract.getPid();
-
                         int id = selectedContract.getID();
                         boolean updated = delegate.updateContract(id, newBonus, newLength);
                         if(updated) {
                             JOptionPane.showMessageDialog(this, "Contract " + id +  " updated.");
-                            //updatePlayers(id, selectedContract);
-                            updateContent();
-                            removeAll();
-                            makeBackMenuButton();
-                            remakeCenterPanel();
-                            makeUpdateButton();
-                            revalidate();
-                            repaint();
+                            setElements();
                         } else {
                             JOptionPane.showMessageDialog(this, "Unable to update contract.");
                         }
@@ -101,56 +93,10 @@ public class UpdatePanel extends JPanel {
         add(updateButton, BorderLayout.SOUTH);
     }
 
-    public void updatePlayers(int id, Contract c) {
-        Player[] playersArray = delegate.getPlayerInfo();
-        for(Player player : playersArray) {
-            if (player.getPid() == id) {
-                player.setPlayerContract(c);
-            }
-        }
-    }
-
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
         makeContractPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
-    }
-
-    public void remakeCenterPanel() {
-        JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
-        JTable contractTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(contractTable);
-        scrollPane.setPreferredSize(new Dimension(600, 300));
-
-
-        JButton select = new JButton("Select Contract");
-        select.addActionListener((ActionEvent e) -> {
-            int selectedRow = contractTable.getSelectedRow();
-            if (selectedRow != -1) {
-                selectedContract = getContractFromSelectedRow(contractTable, selectedRow);
-                if(operationPanel != null) {
-                    centerPanel.remove(operationPanel);
-                }
-                makeOperationPane(selectedContract.getBonus(), selectedContract.getLength());
-                centerPanel.add(operationPanel);
-                revalidate();
-                repaint();
-            } else {
-                JOptionPane.showMessageDialog(this, "No contract selected.");
-            }
-        });
-
-        JPanel contractSelectPanel = new JPanel();
-        contractSelectPanel.setBackground(new Color(34, 34, 34));
-        contractSelectPanel.setPreferredSize(new Dimension(600, 450));
-        contractSelectPanel.setLayout(new BoxLayout(contractSelectPanel, BoxLayout.Y_AXIS));
-        contractSelectPanel.add(scrollPane);
-        contractSelectPanel.add(select);
-        centerPanel.add(contractSelectPanel);
-        add(centerPanel, BorderLayout.CENTER);
-
     }
 
     public void makeContractPanel(JPanel centerPanel) {
@@ -159,7 +105,7 @@ public class UpdatePanel extends JPanel {
 //        for(Contract contract : contractsArray) {
 //            listModel.addElement(contract);
 //        }
-//        DefaultTableModel tableModel = new DefaultTableModel();
+        DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("ID");
         tableModel.addColumn("Bonus");
         tableModel.addColumn("Player ID");
@@ -195,7 +141,6 @@ public class UpdatePanel extends JPanel {
         });
 
         JPanel contractSelectPanel = new JPanel();
-        contractSelectPanel.setBackground(new Color(34, 34, 34));
         contractSelectPanel.setPreferredSize(new Dimension(600, 450));
         contractSelectPanel.setLayout(new BoxLayout(contractSelectPanel, BoxLayout.Y_AXIS));
         contractSelectPanel.add(scrollPane);
@@ -204,8 +149,8 @@ public class UpdatePanel extends JPanel {
     }
 
     private Contract getContractFromSelectedRow(JTable table, int selectedRow) {
-//        int id = (int) table.getValueAt(selectedRow, 2);
         int id = (int) table.getValueAt(selectedRow, 0);
+
         int bonus = (int) table.getValueAt(selectedRow, 1);
         int length = (int) table.getValueAt(selectedRow, 3);
         return new Contract(id, bonus, length);
@@ -242,20 +187,4 @@ public class UpdatePanel extends JPanel {
         operationPanel.add(contractLength);
         operationPanel.add(contractBonus);
     }
-
-    public void updateContent() {
-        tableModel.setRowCount(0);
-
-        Contract[] contractsArray = delegate.getContractInfo();
-        for (Contract contract : contractsArray) {
-            Object[] rowData = {contract.getID(), contract.getBonus(), contract.getPid(), contract.getLength(), contract.getValue(), contract.getSignedDate()};
-            tableModel.addRow(rowData);
-        }
-
-        tableModel.fireTableDataChanged();
-
-        selectedContract = null;
-        operationPanel = null;
-    }
-
 }
