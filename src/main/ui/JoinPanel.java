@@ -42,12 +42,16 @@ public class JoinPanel extends JPanel {
     public void makeBackMenuButton() {
         JButton back = new JButton("Back to the Menu");
         back.addActionListener(e -> cl.show(leagueManager, "menu"));
+        back.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         add(back);
     }
 
     public void makeOperationPanel() {
         JPanel operationPanel = new JPanel();
+        operationPanel.setPreferredSize(new Dimension(200, 50));
+        operationPanel.setBackground(getBackground());
         JLabel title = new JLabel("Enter the lower end salary: ");
+        title.setForeground(Color.WHITE);
         JTextField salaryInput = new JTextField();
         salaryInput.setPreferredSize(new Dimension(100, 30));
         JButton filter = new JButton("Filter");
@@ -83,7 +87,11 @@ public class JoinPanel extends JPanel {
         }
         JTable staffTable = new JTable(tableModel);
         scrollPane = new JScrollPane(staffTable);
-        scrollPane.setPreferredSize(new Dimension(500, 400));
-        add(scrollPane);
+        scrollPane.setBackground(getBackground());
+        JPanel displayPanel = new JPanel();
+        displayPanel.setBackground(getBackground());
+        displayPanel.setPreferredSize(new Dimension(600, 400));
+        displayPanel.add(scrollPane);
+        add(displayPanel);
     }
 }

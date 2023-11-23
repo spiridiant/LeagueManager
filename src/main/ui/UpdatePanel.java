@@ -24,7 +24,6 @@ public class UpdatePanel extends JPanel {
 
     public UpdatePanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-
         this.delegate = delegate;
         this.cl = cl;
         this.leagueManager = leagueManager;
@@ -51,7 +50,11 @@ public class UpdatePanel extends JPanel {
     public void makeBackMenuButton() {
         JButton back = new JButton("Back to the Menu");
         back.addActionListener(e -> cl.show(leagueManager, "menu"));
-        add(back, BorderLayout.NORTH);
+        back.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        JPanel northPanel = new JPanel();
+        northPanel.setBackground(getBackground());
+        northPanel.add(back);
+        add(northPanel, BorderLayout.NORTH);
     }
 
     public void makeUpdateButton() {
@@ -95,6 +98,7 @@ public class UpdatePanel extends JPanel {
 
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
+        centerPanel.setBackground(getBackground());
         makeContractPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }
@@ -141,6 +145,7 @@ public class UpdatePanel extends JPanel {
         });
 
         JPanel contractSelectPanel = new JPanel();
+        contractSelectPanel.setBackground(getBackground());
         contractSelectPanel.setPreferredSize(new Dimension(600, 450));
         contractSelectPanel.setLayout(new BoxLayout(contractSelectPanel, BoxLayout.Y_AXIS));
         contractSelectPanel.add(scrollPane);
@@ -158,11 +163,14 @@ public class UpdatePanel extends JPanel {
 
     public void makeOperationPane(int curr_bonus, int curr_length) {
         operationPanel = new JPanel();
+        operationPanel.setBackground(getBackground());
         operationPanel.setLayout(new GridLayout(2, 2));
         operationPanel.setPreferredSize(new Dimension(200, 60));
 
         JLabel lengthLabel = new JLabel("Contract length");
         JLabel bonusLabel = new JLabel("Bonus");
+        lengthLabel.setForeground(Color.WHITE);
+        bonusLabel.setForeground(Color.WHITE);
 
         contractLength = new JTextField(Integer.toString(curr_length));
         contractLength.addFocusListener(new FocusAdapter() {

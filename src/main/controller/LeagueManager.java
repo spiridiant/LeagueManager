@@ -89,4 +89,9 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     public TeamStaff[] getTeamStaffInfo(int salary) {
         return dbHandler.getTeamStaffInfo(salary);
     }
+
+    @Override
+    public int getHigherThanAvgContractByLength(int length) {
+        return dbHandler.getHigherThanAvgContractByLength(length);
+    }
 }

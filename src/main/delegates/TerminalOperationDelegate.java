@@ -15,4 +15,5 @@ public interface TerminalOperationDelegate {
     public boolean updateContract(int id, int newBonus, int newLength);
 
     public TeamStaff[] getTeamStaffInfo(int salary);
+    public int getHigherThanAvgContractByLength(int length);
 }
