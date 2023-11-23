@@ -207,6 +207,35 @@ public class DatabaseConnectionHandler {
         return result.toArray(new Contract[result.size()]);
     }
 
+    public Contract getHigherThanAvgContractByLength(int length) {
+        ArrayList<Contract> result = new ArrayList<>();
+
+        try {
+            String query = "SELECT c1.cid, c1.pid, c1.bonus, c1.signed_date, AVG(c1.value) " +
+                            "FROM signed_contract c1 " +
+                            "GROUP BY c1.length " +
+                            "HAVING  c1.value > AVG(Select AVG(c2.value) " +
+                                                    "From signed_contract c2)";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                Contract model = new Contract(rs.getInt("bonus"),
+                        rs.getInt("pid"),
+                        length,
+                        rs.getInt("value"),
+                        rs.getObject("signed_date", LocalDateTime.class),
+                        rs.getInt("cid"));
+                rs.close();
+                ps.close();
+                return model;
+            }
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return null;
+    }
+
     public boolean updateContract(int id, int newBonus, int newLength) {
         try {
             //String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE pid = ?";

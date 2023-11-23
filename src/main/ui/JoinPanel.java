@@ -31,6 +31,7 @@ public class JoinPanel extends JPanel {
     }
 
     public void setElements() {
+        removeAll();
         makeBackMenuButton();
         makeOperationPanel();
         makeDisplayPanel(0);

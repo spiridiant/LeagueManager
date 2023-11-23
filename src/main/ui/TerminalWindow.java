@@ -6,17 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TerminalWindow extends JFrame {
-
+    public static final Color BACKGROUND_COLOR = new Color(22, 30, 51);
     private JPanel leagueManager;
-    private TerminalOperationDelegate delegate;
 
     public TerminalWindow(TerminalOperationDelegate delegate) {
         super("Basketball League Manager");
-        this.delegate = delegate;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
         setResizable(false);
+
 
         leagueManager = new JPanel();
         CardLayout cl = new CardLayout();
@@ -36,6 +35,18 @@ public class TerminalWindow extends JFrame {
 
         JoinPanel joinPanel = new JoinPanel(cl, leagueManager, delegate);
         leagueManager.add(joinPanel, "join");
+
+        NestedAggregationGroupByPanel nestedAggregationGroupByPanel = new NestedAggregationGroupByPanel(cl, leagueManager, delegate);
+        leagueManager.add(nestedAggregationGroupByPanel, "nested");
+
+        leagueManager.setBackground(BACKGROUND_COLOR);
+        menuPanel.setBackground(BACKGROUND_COLOR);
+        insertPanel.setBackground(BACKGROUND_COLOR);
+        deletePanel.setBackground(BACKGROUND_COLOR);
+        updatePanel.setBackground(BACKGROUND_COLOR);
+        joinPanel.setBackground(BACKGROUND_COLOR);
+        nestedAggregationGroupByPanel.setBackground(BACKGROUND_COLOR);
+
 
         cl.show(leagueManager, "menu");
         add(leagueManager);
