@@ -7,9 +7,7 @@ import main.Exception.NullContractException;
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
-import main.model.Contract;
-import main.model.Player;
-import main.model.TeamStaff;
+import main.model.*;
 import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
@@ -124,5 +122,15 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     @Override
     public int getHigherThanAvgContractByLength(int length) {
         return dbHandler.getHigherThanAvgContractByLength(length);
+    }
+
+    @Override
+    public Sponsor[] getSponsors() {
+        return dbHandler.getSponsors();
+    }
+
+    @Override
+    public Team[] getTeamSponsoredByAll() {
+        return dbHandler.getTeamSponsoredByAll();
     }
 }

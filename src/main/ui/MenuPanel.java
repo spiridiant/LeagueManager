@@ -10,8 +10,9 @@ public class MenuPanel extends JPanel {
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
 
-    private static final int LOGO_HEIGHT = 400;
-    private static final int GAP_HEIGHT = 15;
+    private static final int LOGO_WIDTH = 550;
+    private static final int LOGO_HEIGHT = 350;
+    private static final int GAP_HEIGHT = 10;
 
     public MenuPanel(CardLayout cl, JPanel leagueManager) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -49,15 +50,20 @@ public class MenuPanel extends JPanel {
             cl.show(leagueManager, "nested");
          });
 
+        JButton division = new JButton("division");
+        division.addActionListener(e -> {
+            cl.show(leagueManager, "division");
+        });
+
         insert.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         delete.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         update.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         join.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         nested.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        division.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         add(Box.createVerticalStrut(LOGO_HEIGHT));
 
-        add(Box.createVerticalStrut(GAP_HEIGHT));
         add(insert);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(delete);
@@ -67,6 +73,8 @@ public class MenuPanel extends JPanel {
         add(join);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(nested);
+        add(Box.createVerticalStrut(GAP_HEIGHT));
+        add(division);
     }
 
     @Override
@@ -82,6 +90,6 @@ public class MenuPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        g.drawImage(image, 220, 0, 630, 400, new Color(0, 0, 0, 0), this);
+        g.drawImage(image, (PANEL_WIDTH - LOGO_WIDTH) / 2 - 5, 0, LOGO_WIDTH, LOGO_HEIGHT, new Color(0, 0, 0, 0), this);
     }
 }

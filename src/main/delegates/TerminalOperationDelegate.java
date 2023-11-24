@@ -4,9 +4,7 @@ import main.Exception.InvalidBonusException;
 import main.Exception.InvalidLengthException;
 import main.Exception.InvalidSalaryException;
 import main.Exception.NullContractException;
-import main.model.Contract;
-import main.model.TeamStaff;
-import main.model.Player;
+import main.model.*;
 
 import java.io.FileNotFoundException;
 
@@ -20,4 +18,6 @@ public interface TerminalOperationDelegate {
 
     public TeamStaff[] getTeamStaffInfo(String input) throws InvalidSalaryException;
     public int getHigherThanAvgContractByLength(int length);
+    public Sponsor[] getSponsors();
+    public Team[] getTeamSponsoredByAll();
 }

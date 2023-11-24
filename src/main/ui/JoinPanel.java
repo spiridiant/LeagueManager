@@ -78,12 +78,12 @@ public class JoinPanel extends JPanel {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Team Name");
         tableModel.addColumn("Home City");
+        tableModel.addColumn("Team Name");
         tableModel.addColumn("Staff Name");
         tableModel.addColumn("Salary");
         for (TeamStaff staff : staffArray) {
-            Object[] rowData = {staff.getTName(), staff.getCity(), staff.getStaffName(), staff.getSalary()};
+            Object[] rowData = {staff.getCity(), staff.getTName(), staff.getStaffName(), staff.getSalary()};
             tableModel.addRow(rowData);
         }
         JTable staffTable = new JTable(tableModel);

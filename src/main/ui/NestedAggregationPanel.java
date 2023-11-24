@@ -9,14 +9,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class NestedAggregationGroupByPanel extends JPanel{
+public class NestedAggregationPanel extends JPanel{
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
     private TerminalOperationDelegate delegate;
     private CardLayout cl;
     private JPanel leagueManager;
     private JLabel value;
-    public NestedAggregationGroupByPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
+    public NestedAggregationPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         setForeground(Color.WHITE);
         this.delegate = delegate;

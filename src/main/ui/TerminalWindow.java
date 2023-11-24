@@ -35,8 +35,11 @@ public class TerminalWindow extends JFrame {
         JoinPanel joinPanel = new JoinPanel(cl, leagueManager, delegate);
         leagueManager.add(joinPanel, "join");
 
-        NestedAggregationGroupByPanel nestedAggregationGroupByPanel = new NestedAggregationGroupByPanel(cl, leagueManager, delegate);
-        leagueManager.add(nestedAggregationGroupByPanel, "nested");
+        NestedAggregationPanel nestedAggregationPanel = new NestedAggregationPanel(cl, leagueManager, delegate);
+        leagueManager.add(nestedAggregationPanel, "nested");
+
+        DivisionPanel divisionPanel = new DivisionPanel(cl, leagueManager, delegate);
+        leagueManager.add(divisionPanel, "division");
 
         leagueManager.setBackground(BACKGROUND_COLOR);
         menuPanel.setBackground(BACKGROUND_COLOR);
@@ -44,7 +47,8 @@ public class TerminalWindow extends JFrame {
         deletePanel.setBackground(BACKGROUND_COLOR);
         updatePanel.setBackground(BACKGROUND_COLOR);
         joinPanel.setBackground(BACKGROUND_COLOR);
-        nestedAggregationGroupByPanel.setBackground(BACKGROUND_COLOR);
+        nestedAggregationPanel.setBackground(BACKGROUND_COLOR);
+        divisionPanel.setBackground(BACKGROUND_COLOR);
 
 
         cl.show(leagueManager, "menu");
