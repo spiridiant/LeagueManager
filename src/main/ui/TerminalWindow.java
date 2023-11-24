@@ -16,7 +16,6 @@ public class TerminalWindow extends JFrame {
         setUndecorated(false);
         setResizable(false);
 
-
         leagueManager = new JPanel();
         CardLayout cl = new CardLayout();
         leagueManager.setLayout(cl);
@@ -55,7 +54,6 @@ public class TerminalWindow extends JFrame {
         centreOnScreen();
         setVisible(true);
     }
-
 
     // Centres frame on desktop, from SpaceInvader
     // modifies: this

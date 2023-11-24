@@ -2,6 +2,7 @@ package main.database;
 
 import main.model.Contract;
 import main.model.Player;
+import main.model.Team;
 import main.model.TeamStaff;
 import main.util.PrintablePreparedStatement;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -278,6 +279,36 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new TeamStaff[result.size()]);
+    }
+
+    public Team[] getTeamSponsoredByAll() {
+        ArrayList<Team> result = new ArrayList<>();
+
+        try {
+            String query = "SELECT t.tname, t.city t.arena, t.division, t.cap_space " +
+                            "FROM team t sponsor s1, sponsor_sponsors_team sst " +
+                            "WHERE NOT EXISTS (SELECT s.sid " +
+                                                "FROM sponsor s " +
+                                                "EXCEPT (SELECT sst.sid " +
+                                                        "FROM sponsor_sponsors_team sst " +
+                                                        "WHERE  sst.sid = s.sid AND t.tname = sst.tname AND t.city = sst.city ";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Team model = new Team(rs.getString("tname"),
+                        rs.getString("city"),
+                        rs.getString("arena"),
+                        rs.getString("division"),
+                        rs.getInt("cap_space"));
+                result.add(model);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new Team[result.size()]);
     }
 
     private void rollbackConnection() {

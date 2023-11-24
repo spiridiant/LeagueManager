@@ -15,6 +15,7 @@ public class JoinPanel extends JPanel {
     private TerminalOperationDelegate delegate;
     private CardLayout cl;
     private JPanel leagueManager;
+    private JPanel displayPanel;
 
     //    private JScrollPane scrollPane;
     public JoinPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
@@ -26,16 +27,16 @@ public class JoinPanel extends JPanel {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent evt) {
-                setElements("0");
+                setElements();
             }
         });
     }
 
-    public void setElements(String salary) {
+    public void setElements() {
         removeAll();
         makeBackMenuButton();
         makeOperationPanel();
-        makeDisplayPanel(salary);
+        makeDisplayPanel("0");
         revalidate();
         repaint();
     }
@@ -53,12 +54,12 @@ public class JoinPanel extends JPanel {
         operationPanel.setBackground(getBackground());
         JLabel title = new JLabel("Enter the lower end salary: ");
         title.setForeground(Color.WHITE);
-        JTextField salaryInput = new JTextField();
+        JTextField salaryInput = new JTextField("0");
         salaryInput.setPreferredSize(new Dimension(100, 30));
         JButton filter = new JButton("Filter");
         filter.addActionListener((ActionEvent e) -> {
             String input = salaryInput.getText();
-            setElements(input);
+            makeDisplayPanel(input);
             revalidate();
             repaint();
 
@@ -88,7 +89,10 @@ public class JoinPanel extends JPanel {
         JTable staffTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(staffTable);
         scrollPane.setBackground(getBackground());
-        JPanel displayPanel = new JPanel();
+        if(displayPanel != null) {
+            remove(displayPanel);
+        }
+        displayPanel = new JPanel();
         displayPanel.setBackground(getBackground());
         displayPanel.setPreferredSize(new Dimension(600, 400));
         displayPanel.add(scrollPane);

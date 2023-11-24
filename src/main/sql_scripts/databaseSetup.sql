@@ -201,26 +201,53 @@ INSERT INTO Sponsor
 VALUES (3, 'Galactic Gearworks', 'Universe''s Finest Creations, Engineered for the Stars!');
 
 INSERT INTO Sponsor
-VALUES (4, 'Paws & Play Pet Resorts', 'Where Tails Wag and Whiskers Purr – Your Pet''s Paradise!');
+VALUES (4, 'Eris', 'Just bang it!');
 
 INSERT INTO Sponsor
 VALUES (5, 'InfiniTech Labs', 'Limitless Possibilities, Crafted in Every Code!');
 
+-- INSERT INTO Sponsor
+-- VALUES (6, 'Additional Sponsor', 'Test division');
+
 -- Sponsor Sponsors Team
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 1, 'Raptors', 'Toronto');
+VALUES (100000, 1, 'Raptors', 'Toronto');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 2, 'Pacers', 'Indiana');
+VALUES (200000, 2, 'Pacers', 'Indiana');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 3, 'Thunder', 'Oklahoma City');
+VALUES (220000, 5, 'Clippers', 'Los Angeles');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 4, 'Lakers', 'Los Angeles');
+VALUES (50000, 1, 'Thunder', 'Oklahoma City');
 
 INSERT INTO Sponsor_Sponsors_Team
-VALUES (123, 5, 'Clippers', 'Los Angeles');
+VALUES (12000, 2, 'Thunder', 'Oklahoma City');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (140000, 3, 'Thunder', 'Oklahoma City');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (20000, 4, 'Thunder', 'Oklahoma City');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (11000, 5, 'Thunder', 'Oklahoma City');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (100000, 1, 'Lakers', 'Los Angeles');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (200000, 2, 'Lakers', 'Los Angeles');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (140000, 3, 'Lakers', 'Los Angeles');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (370000, 4, 'Lakers', 'Los Angeles');
+
+INSERT INTO Sponsor_Sponsors_Team
+VALUES (13000, 5, 'Lakers', 'Los Angeles');
 
 
 -- -- League table
