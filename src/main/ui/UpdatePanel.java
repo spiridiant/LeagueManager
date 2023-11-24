@@ -1,5 +1,8 @@
 package main.ui;
 
+import main.Exception.InvalidBonusException;
+import main.Exception.InvalidLengthException;
+import main.Exception.NullContractException;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
 
@@ -42,6 +45,7 @@ public class UpdatePanel extends JPanel {
         removeAll();
         makeBackMenuButton();
         makeCenterPanel();
+        makeOperationPane(0, 0);
         makeUpdateButton();
         revalidate();
         repaint();
@@ -60,40 +64,29 @@ public class UpdatePanel extends JPanel {
     public void makeUpdateButton() {
         JButton updateButton = new JButton("Update Contract");
         updateButton.addActionListener((ActionEvent e) -> {
-            if(selectedContract != null){
-                String length = contractLength.getText();
-                int newLength = 0;
-                try {
-                    newLength = Integer.parseInt(length);
-                    if(newLength <= 0 || newLength > 5) {
-                        throw new NumberFormatException();
-                    }
-                    String bonus = contractBonus.getText();
-                    int newBonus = 0;
-                    try {
-                        newBonus = Integer.parseInt(bonus);
-                        if(newBonus < 0 || newBonus > 75000) {
-                            throw new NumberFormatException();
-                        }
-                        int id = selectedContract.getID();
-                        boolean updated = delegate.updateContract(id, newBonus, newLength);
-                        if(updated) {
-                            JOptionPane.showMessageDialog(this, "Contract " + id +  " updated.");
-                            setElements();
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Unable to update contract.");
-                        }
-                    } catch (NumberFormatException numE) {
-                        JOptionPane.showMessageDialog(this, "Invalid Bonus amount, bonus needs to be an integer >= 0 and <= 75,000");
-                    }
-                } catch (NumberFormatException numE) {
-                    JOptionPane.showMessageDialog(this, "Invalid contract length, contract length needs to be an integer > 0 and <= 5");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "No contract selected.");
-            }
+            updateContract();
         });
         add(updateButton, BorderLayout.SOUTH);
+    }
+
+    private void updateContract() {
+        String length = contractLength.getText();
+        String bonus = contractBonus.getText();
+        try {
+            boolean updated = delegate.updateContract(selectedContract, length, bonus);
+            if (updated) {
+                JOptionPane.showMessageDialog(this, "Contract " + selectedContract.getID() + " updated.");
+                setElements();
+            } else {
+                JOptionPane.showMessageDialog(this, "Unable to update contract" + selectedContract.getID() );
+            }
+        } catch (InvalidBonusException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (NullContractException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (InvalidLengthException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 
     public void makeCenterPanel() {
@@ -105,10 +98,6 @@ public class UpdatePanel extends JPanel {
 
     public void makeContractPanel(JPanel centerPanel) {
         Contract[] contractsArray = delegate.getContractInfo();
-//        DefaultListModel<Contract> listModel = new DefaultListModel<>();
-//        for(Contract contract : contractsArray) {
-//            listModel.addElement(contract);
-//        }
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("ID");
         tableModel.addColumn("Bonus");
@@ -117,8 +106,8 @@ public class UpdatePanel extends JPanel {
         tableModel.addColumn("Value");
         tableModel.addColumn("Signed Date");
 
-        for(Contract contract : contractsArray) {
-            Object[] rowData = {contract.getID(), contract.getBonus(),contract.getPid(), contract.getLength(), contract.getValue(), contract.getSignedDate()};
+        for (Contract contract : contractsArray) {
+            Object[] rowData = {contract.getID(), contract.getBonus(), contract.getPid(), contract.getLength(), contract.getValue(), contract.getSignedDate()};
             tableModel.addRow(rowData);
         }
 
@@ -132,7 +121,7 @@ public class UpdatePanel extends JPanel {
             int selectedRow = contractTable.getSelectedRow();
             if (selectedRow != -1) {
                 selectedContract = getContractFromSelectedRow(contractTable, selectedRow);
-                if(operationPanel != null) {
+                if (operationPanel != null) {
                     centerPanel.remove(operationPanel);
                 }
                 makeOperationPane(selectedContract.getBonus(), selectedContract.getLength());
@@ -175,21 +164,21 @@ public class UpdatePanel extends JPanel {
         contractLength = new JTextField(Integer.toString(curr_length));
         contractLength.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                JTextField source = (JTextField)e.getComponent();
+                JTextField source = (JTextField) e.getComponent();
                 source.setText("");
                 source.removeFocusListener(this);
             }
         });
-        contractLength.setPreferredSize(new Dimension(100,30));
+        contractLength.setPreferredSize(new Dimension(100, 30));
         contractBonus = new JTextField(Integer.toString(curr_bonus));
         contractBonus.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                JTextField source = (JTextField)e.getComponent();
+                JTextField source = (JTextField) e.getComponent();
                 source.setText("");
                 source.removeFocusListener(this);
             }
         });
-        contractBonus.setPreferredSize(new Dimension(100,30));
+        contractBonus.setPreferredSize(new Dimension(100, 30));
         operationPanel.add(lengthLabel);
         operationPanel.add(bonusLabel);
         operationPanel.add(contractLength);

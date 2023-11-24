@@ -1,5 +1,6 @@
 package main.ui;
 
+import main.Exception.InvalidSalaryException;
 import main.delegates.TerminalOperationDelegate;
 import main.model.TeamStaff;
 
@@ -15,7 +16,7 @@ public class JoinPanel extends JPanel {
     private CardLayout cl;
     private JPanel leagueManager;
 
-    private JScrollPane scrollPane;
+    //    private JScrollPane scrollPane;
     public JoinPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.delegate = delegate;
         this.cl = cl;
@@ -25,16 +26,16 @@ public class JoinPanel extends JPanel {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent evt) {
-                setElements();
+                setElements("0");
             }
         });
     }
 
-    public void setElements() {
+    public void setElements(String salary) {
         removeAll();
         makeBackMenuButton();
         makeOperationPanel();
-        makeDisplayPanel(0);
+        makeDisplayPanel(salary);
         revalidate();
         repaint();
     }
@@ -56,37 +57,36 @@ public class JoinPanel extends JPanel {
         salaryInput.setPreferredSize(new Dimension(100, 30));
         JButton filter = new JButton("Filter");
         filter.addActionListener((ActionEvent e) -> {
-            try {
-                String input = salaryInput.getText();
-                int salary = Integer.parseInt(input);
-                if(scrollPane != null) {
-                    remove(scrollPane);
-                }
-                makeDisplayPanel(salary);
-                revalidate();
-                repaint();
-            } catch (NumberFormatException num) {
-                JOptionPane.showMessageDialog(this, "Invalid salary, it needs to be an integer");
-            }
+            String input = salaryInput.getText();
+            setElements(input);
+            revalidate();
+            repaint();
+
         });
         operationPanel.add(title);
         operationPanel.add(salaryInput);
         operationPanel.add(filter);
         add(operationPanel);
     }
-    public void makeDisplayPanel(int salary) {
-        TeamStaff[] staffArray = delegate.getTeamStaffInfo(salary);
+
+    public void makeDisplayPanel(String salary) {
+        TeamStaff[] staffArray = new TeamStaff[0];
+        try {
+            staffArray = delegate.getTeamStaffInfo(salary);
+        } catch (InvalidSalaryException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Team Name");
         tableModel.addColumn("Home City");
         tableModel.addColumn("Staff Name");
         tableModel.addColumn("Salary");
-        for(TeamStaff staff : staffArray) {
-            Object[] rowData = {staff.getTName(), staff.getCity(),staff.getStaffName(), staff.getSalary()};
+        for (TeamStaff staff : staffArray) {
+            Object[] rowData = {staff.getTName(), staff.getCity(), staff.getStaffName(), staff.getSalary()};
             tableModel.addRow(rowData);
         }
         JTable staffTable = new JTable(tableModel);
-        scrollPane = new JScrollPane(staffTable);
+        JScrollPane scrollPane = new JScrollPane(staffTable);
         scrollPane.setBackground(getBackground());
         JPanel displayPanel = new JPanel();
         displayPanel.setBackground(getBackground());

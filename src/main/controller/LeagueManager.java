@@ -1,5 +1,9 @@
 package main.controller;
 
+import main.Exception.InvalidBonusException;
+import main.Exception.InvalidLengthException;
+import main.Exception.InvalidSalaryException;
+import main.Exception.NullContractException;
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
@@ -76,18 +80,45 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     }
 
     @Override
-    public boolean updateContract(int id, int newBonus, int newLength) {
-        return dbHandler.updateContract(id, newBonus, newLength);
+    public boolean updateContract(Contract contract, String length, String bonus) throws NullContractException, InvalidBonusException, InvalidLengthException {
+        if (contract == null) {
+            throw new NullContractException();
+        }
+        int newBonus = 0;
+        int newLength = 0;
+
+        try {
+            newLength = Integer.parseInt(length);
+            if(newLength <= 0 || newLength > 5) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidLengthException();
+        }
+        try {
+            newBonus = Integer.parseInt(bonus);
+            if(newBonus < 0 || newBonus > 75000) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidBonusException();
+        }
+        return dbHandler.updateContract(contract.getID(), newLength, newBonus);
+    }
+
+    @Override
+    public TeamStaff[] getTeamStaffInfo(String input) throws InvalidSalaryException {
+        try {
+            int salary = Integer.parseInt(input);
+            return dbHandler.getTeamStaffInfo(salary);
+        } catch(NumberFormatException e) {
+            throw new InvalidSalaryException();
+        }
     }
 
     @Override
     public boolean deletePlayer(int pid) {
         return dbHandler.deletePlayer(pid);
-    }
-
-    @Override
-    public TeamStaff[] getTeamStaffInfo(int salary) {
-        return dbHandler.getTeamStaffInfo(salary);
     }
 
     @Override

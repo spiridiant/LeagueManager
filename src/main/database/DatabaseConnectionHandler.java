@@ -230,7 +230,7 @@ public class DatabaseConnectionHandler {
         return 0;
     }
 
-    public boolean updateContract(int id, int newBonus, int newLength) {
+    public boolean updateContract(int id, int newLength, int newBonus) {
         try {
             //String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE pid = ?";
             String query = "UPDATE signed_contract SET bonus = ?, length = ? WHERE cid = ?";
@@ -242,6 +242,7 @@ public class DatabaseConnectionHandler {
             int rowCount = ps.executeUpdate();
             if (rowCount == 0) {
                 System.out.println(WARNING_TAG + " Contract " + id + " does not exist!");
+                return false;
             }
             connection.commit();
             ps.close();

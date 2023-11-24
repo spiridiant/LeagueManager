@@ -1,5 +1,9 @@
 package main.delegates;
 
+import main.Exception.InvalidBonusException;
+import main.Exception.InvalidLengthException;
+import main.Exception.InvalidSalaryException;
+import main.Exception.NullContractException;
 import main.model.Contract;
 import main.model.TeamStaff;
 import main.model.Player;
@@ -12,8 +16,8 @@ public interface TerminalOperationDelegate {
     public Player[] getPlayerInfo();
     public boolean deletePlayer(int pid);
     public void databaseSetup() throws FileNotFoundException;
-    public boolean updateContract(int id, int newBonus, int newLength);
+    public boolean updateContract(Contract contract, String Length,String bonus) throws NullContractException, InvalidBonusException, InvalidLengthException;
 
-    public TeamStaff[] getTeamStaffInfo(int salary);
+    public TeamStaff[] getTeamStaffInfo(String input) throws InvalidSalaryException;
     public int getHigherThanAvgContractByLength(int length);
 }
