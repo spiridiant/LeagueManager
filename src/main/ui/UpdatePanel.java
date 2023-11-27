@@ -5,9 +5,11 @@ import main.Exception.InvalidLengthException;
 import main.Exception.NullContractException;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
+import main.model.ListTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -98,7 +100,7 @@ public class UpdatePanel extends JPanel {
 
     public void makeContractPanel(JPanel centerPanel) {
         Contract[] contractsArray = delegate.getContractInfo();
-        DefaultTableModel tableModel = new DefaultTableModel();
+        ListTableModel tableModel = new ListTableModel();
         tableModel.addColumn("ID");
         tableModel.addColumn("Bonus");
         tableModel.addColumn("Player ID");
@@ -115,30 +117,33 @@ public class UpdatePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(contractTable);
         scrollPane.setPreferredSize(new Dimension(600, 300));
 
+        ListSelectionModel selectionModel = contractTable.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        JButton select = new JButton("Select Contract");
-        select.addActionListener((ActionEvent e) -> {
-            int selectedRow = contractTable.getSelectedRow();
-            if (selectedRow != -1) {
-                selectedContract = getContractFromSelectedRow(contractTable, selectedRow);
-                if (operationPanel != null) {
-                    centerPanel.remove(operationPanel);
+        // Add a selection listener to handle single selection
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = contractTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        selectedContract = getContractFromSelectedRow(contractTable, selectedRow);
+                        if (operationPanel != null) {
+                            centerPanel.remove(operationPanel);
+                        }
+                        makeOperationPane(selectedContract.getBonus(), selectedContract.getLength());
+                        centerPanel.add(operationPanel);
+                        revalidate();
+                        repaint();
+                    }
                 }
-                makeOperationPane(selectedContract.getBonus(), selectedContract.getLength());
-                centerPanel.add(operationPanel);
-                revalidate();
-                repaint();
-            } else {
-                JOptionPane.showMessageDialog(this, "No contract selected.");
             }
         });
 
         JPanel contractSelectPanel = new JPanel();
-        contractSelectPanel.setBackground(getBackground());
         contractSelectPanel.setPreferredSize(new Dimension(600, 450));
         contractSelectPanel.setLayout(new BoxLayout(contractSelectPanel, BoxLayout.Y_AXIS));
         contractSelectPanel.add(scrollPane);
-        contractSelectPanel.add(select);
         centerPanel.add(contractSelectPanel);
     }
 

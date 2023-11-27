@@ -2,10 +2,10 @@ package main.ui;
 
 import main.Exception.InvalidSalaryException;
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 import main.model.TeamStaff;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -77,7 +77,8 @@ public class JoinPanel extends JPanel {
         } catch (InvalidSalaryException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        DefaultTableModel tableModel = new DefaultTableModel();
+        ListTableModel tableModel = new ListTableModel();
+
         tableModel.addColumn("Home City");
         tableModel.addColumn("Team Name");
         tableModel.addColumn("Staff Name");
