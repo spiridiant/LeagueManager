@@ -9,7 +9,7 @@ public class MenuPanel extends JPanel {
 
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
-
+    public static final Dimension BUTTON_SIZE = new Dimension(120, 25);
     private static final int LOGO_WIDTH = 550;
     private static final int LOGO_HEIGHT = 350;
     private static final int GAP_HEIGHT = 10;
@@ -36,23 +36,28 @@ public class MenuPanel extends JPanel {
              cl.show(leagueManager, "delete");
          });
 
-         JButton update = new JButton("update");
+         JButton update = new JButton("Update");
          update.addActionListener(e -> {
              cl.show(leagueManager, "update");
          });
-         JButton join = new JButton("join");
+         JButton join = new JButton("Join");
          join.addActionListener(e -> {
              cl.show(leagueManager, "join");
          });
 
-        JButton nested = new JButton("nested");
+        JButton nested = new JButton("Nested");
         nested.addActionListener(e -> {
             cl.show(leagueManager, "nested");
          });
 
-        JButton division = new JButton("division");
+        JButton division = new JButton("Division");
         division.addActionListener(e -> {
             cl.show(leagueManager, "division");
+        });
+
+        JButton quit = new JButton("Quit");
+        quit.addActionListener(e -> {
+            System.exit(0);
         });
 
         insert.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -61,6 +66,15 @@ public class MenuPanel extends JPanel {
         join.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         nested.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         division.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        quit.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+
+        insert.setMaximumSize(BUTTON_SIZE);
+        delete.setMaximumSize(BUTTON_SIZE);
+        update.setMaximumSize(BUTTON_SIZE);
+        join.setMaximumSize(BUTTON_SIZE);
+        nested.setMaximumSize(BUTTON_SIZE);
+        division.setMaximumSize(BUTTON_SIZE);
+        quit.setMaximumSize(BUTTON_SIZE);
 
         add(Box.createVerticalStrut(LOGO_HEIGHT));
 
@@ -75,6 +89,8 @@ public class MenuPanel extends JPanel {
         add(nested);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(division);
+        add(Box.createVerticalStrut(GAP_HEIGHT));
+        add(quit);
     }
 
     @Override
