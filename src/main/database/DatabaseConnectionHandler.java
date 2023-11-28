@@ -341,8 +341,6 @@ public class DatabaseConnectionHandler {
     public void databaseSetup() throws FileNotFoundException {
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.setStopOnError(false);
-        scriptRunner.runScript(new FileReader("./src/main/sql_scripts/dropTables.sql"));
-        scriptRunner.setStopOnError(true);
         scriptRunner.runScript(new FileReader("./src/main/sql_scripts/databaseSetup.sql"));
     }
 
