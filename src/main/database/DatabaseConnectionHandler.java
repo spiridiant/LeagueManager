@@ -378,7 +378,13 @@ public class DatabaseConnectionHandler {
         try {
             String query = "SELECT * FROM Team WHERE ";
 
-            query += attribute + " " + comparison + " ?";
+            if (comparison.equals("LIKE")) {
+                query += "UPPER(" + attribute + ") "  + "LIKE" + " UPPER(?)";
+            } else if (attribute.equals("Cap_Space")) {
+                query += attribute + " " + comparison + " ?";
+            } else if (comparison.equals("=")) { // string equals
+                query += "UPPER(" + attribute + ") "  + comparison + " UPPER(?)";
+            }
 
             PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
 
