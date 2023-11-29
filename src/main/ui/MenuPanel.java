@@ -20,7 +20,7 @@ public class MenuPanel extends JPanel {
 
          setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-         JButton insert = new JButton("insert");
+         JButton insert = new JButton("Insert");
          insert.addActionListener(e -> {
             if (leagueManager.getComponent(1) instanceof InsertPanel) {
                 ((InsertPanel) leagueManager.getComponent(1)).updateContent();
@@ -28,7 +28,7 @@ public class MenuPanel extends JPanel {
              cl.show(leagueManager, "insert");
          });
 
-         JButton delete = new JButton("delete");
+         JButton delete = new JButton("Delete");
          delete.addActionListener(e -> {
             if (leagueManager.getComponent(2) instanceof DeletePanel) {
                 ((DeletePanel) leagueManager.getComponent(2)).updateContent();
@@ -40,6 +40,12 @@ public class MenuPanel extends JPanel {
          update.addActionListener(e -> {
              cl.show(leagueManager, "update");
          });
+
+        JButton select = new JButton("Select");
+        select.addActionListener(e -> {
+            cl.show(leagueManager, "select");
+        });
+
          JButton join = new JButton("Join");
          join.addActionListener(e -> {
              cl.show(leagueManager, "join");
@@ -63,6 +69,7 @@ public class MenuPanel extends JPanel {
         insert.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         delete.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         update.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        select.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         join.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         nested.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         division.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -71,6 +78,7 @@ public class MenuPanel extends JPanel {
         insert.setMaximumSize(BUTTON_SIZE);
         delete.setMaximumSize(BUTTON_SIZE);
         update.setMaximumSize(BUTTON_SIZE);
+        select.setMaximumSize(BUTTON_SIZE);
         join.setMaximumSize(BUTTON_SIZE);
         nested.setMaximumSize(BUTTON_SIZE);
         division.setMaximumSize(BUTTON_SIZE);
@@ -83,6 +91,8 @@ public class MenuPanel extends JPanel {
         add(delete);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(update);
+        add(Box.createVerticalStrut(GAP_HEIGHT));
+        add(select);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(join);
         add(Box.createVerticalStrut(GAP_HEIGHT));

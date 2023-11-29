@@ -33,8 +33,8 @@ CREATE TABLE Division
 
 CREATE TABLE Team
 (
-    TName          VARCHAR2 (50),
-    Cap_Space     VARCHAR2 (50),
+    TName         VARCHAR2 (50),
+    Cap_Space     INTEGER,
     Arena         VARCHAR2 (50),
     City          VARCHAR2 (50),
     DName VARCHAR2 (50) NOT NULL,

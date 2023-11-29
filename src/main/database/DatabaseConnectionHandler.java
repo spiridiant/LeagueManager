@@ -245,6 +245,34 @@ public class DatabaseConnectionHandler {
         return result.toArray(new Player[result.size()]);
     }
 
+    public Team[] getTeamInfo() {
+        ArrayList<Team> result = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Team";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String teamName = rs.getString("TName");
+                int capSpace = rs.getInt("Cap_Space");
+                String arenaName = rs.getString("Arena");
+                String cityName = rs.getString("City");
+                String divisionName = rs.getString("DName");
+
+                Team model = new Team(teamName, cityName, arenaName, divisionName, capSpace);
+                result.add(model);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return result.toArray(new Team[result.size()]);
+    }
+
     public Contract[] getContractInfo() {
         ArrayList<Contract> result = new ArrayList<>();
 
@@ -315,6 +343,40 @@ public class DatabaseConnectionHandler {
             return false;
         }
         return true;
+    }
+
+    public Team[] selectTeams(String attribute, String comparison, String value) {
+        ArrayList<Team> teams = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Team WHERE ";
+
+            query += attribute + " " + comparison + " ?";
+
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            ps.setString(1, value);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("TName");
+                String city = rs.getString("City");
+                String arena = rs.getString("Arena");
+                String division = rs.getString("DName");
+                int cap_space = rs.getInt("Cap_Space");
+
+                Team team = new Team(name, city, arena, division, cap_space);
+                teams.add(team);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teams.toArray(new Team[teams.size()]);
     }
 
     public TeamStaff[] getTeamStaffInfo(int salary) {
