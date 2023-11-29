@@ -299,6 +299,34 @@ public class DatabaseConnectionHandler {
         return result.toArray(new Contract[result.size()]);
     }
 
+    public SponsorSponsoredAmount[] getSponsoredAmounts() {
+        ArrayList<SponsorSponsoredAmount> sponsors = new ArrayList<>();
+        try {
+            String query = "Select S.Name, SUM(T.Sponsored_Amount) AS TOTALSPONSOREDAMT " +
+                    "FROM Sponsor S, Sponsor_Sponsors_Team T " +
+                    "WHERE S.SID = T.SID " +
+                    "GROUP BY S.Name " +
+                    "ORDER BY TOTALSPONSOREDAMT DESC";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                int amt = rs.getInt("TOTALSPONSOREDAMT");
+
+                SponsorSponsoredAmount sponsor = new SponsorSponsoredAmount(name, amt);
+                sponsors.add(sponsor);
+            }
+
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return sponsors.toArray(new SponsorSponsoredAmount[sponsors.size()]);
+    }
+
     public int getHigherThanAvgContractByLength(int length) {
         ArrayList<Contract> result = new ArrayList<>();
 

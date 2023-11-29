@@ -172,6 +172,11 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     }
 
     @Override
+    public SponsorSponsoredAmount[] getSponsoredAmounts() {
+        return dbHandler.getSponsoredAmounts();
+    }
+
+    @Override
     public int getHigherThanAvgContractByLength(int length) {
         return dbHandler.getHigherThanAvgContractByLength(length);
     }
