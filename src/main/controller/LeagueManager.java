@@ -165,6 +165,21 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
                 break;
             case "=":
                 break;
+            case "contains":
+                comparison = "LIKE";
+                value = "%" + value + "%";
+                break;
+            case "starts with":
+                comparison = "LIKE";
+                value = value + "%";
+                break;
+            case "equals":
+                comparison = "=";
+                break;
+            case "ends with":
+                comparison = "LIKE";
+                value = "%" + value;
+                break;
             default:
                 throw new NoComparatorSelectedException();
         }

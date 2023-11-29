@@ -6,8 +6,6 @@ import main.model.SponsorSponsoredAmount;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class GroupByPanel extends JPanel{
     private static final int PANEL_WIDTH = 1080;
@@ -15,7 +13,6 @@ public class GroupByPanel extends JPanel{
     private TerminalOperationDelegate delegate;
     private CardLayout cl;
     private JPanel leagueManager;
-    private JLabel value;
     private DefaultTableModel tableModel;
     private JTable sponsorsTable;
     public GroupByPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
@@ -25,6 +22,7 @@ public class GroupByPanel extends JPanel{
         this.delegate = delegate;
         this.cl = cl;
         this.leagueManager = leagueManager;
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         tableModel = new DefaultTableModel();
         sponsorsTable = new JTable(tableModel);
@@ -41,10 +39,17 @@ public class GroupByPanel extends JPanel{
         repaint();
     }
 
+    public void makeBackMenuButton() {
+        JButton back = new JButton("Back to the Menu");
+        back.addActionListener(e -> cl.show(leagueManager, "menu"));
+        back.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        add(back);
+    }
+
     private void makeOperationPanel() {
         JPanel operationPanel = new JPanel();
         operationPanel.setPreferredSize(new Dimension(PANEL_WIDTH, 30));
-        operationPanel.setBackground(getBackground());
+        operationPanel.setBackground(new Color(22, 30, 51));
         JLabel label1 = new JLabel("Find Total Sponsored Amount by Sponsor");
         label1.setForeground(Color.WHITE);
         JButton groupByButton = new JButton("Calculate Sponsored Amounts");
@@ -79,12 +84,6 @@ public class GroupByPanel extends JPanel{
     public void groupBySponsor() {
         SponsorSponsoredAmount[] sponsors = delegate.getSponsoredAmounts();
         createTable(sponsors);
-    }
-    public void makeBackMenuButton() {
-        JButton back = new JButton("Back to the Menu");
-        back.addActionListener(e -> cl.show(leagueManager, "menu"));
-        back.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        add(back);
     }
 
 }

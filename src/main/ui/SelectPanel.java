@@ -1,5 +1,6 @@
 package main.ui;
 
+import main.Exception.InvalidNumException;
 import main.Exception.NoAttributeSelectedException;
 import main.Exception.NoComparatorSelectedException;
 import main.delegates.TerminalOperationDelegate;
@@ -32,6 +33,7 @@ public class SelectPanel extends JPanel {
         this.delegate = delegate;
         this.cl = cl;
         this.leagueManager = leagueManager;
+        comparisonComboBox = new JComboBox<>();
 
         setLayout(new BorderLayout());
 
@@ -68,24 +70,34 @@ public class SelectPanel extends JPanel {
     private JPanel createFilterPanel() {
         JPanel filterPanel = new JPanel();
 
-        JLabel label = new JLabel("Values are case sensitive.");
-
         String[] attributes = {"Team Name", "Cap Space", "Arena", "City Name", "Division Name"};
         attributeComboBox = new JComboBox<>(attributes);
 
-        String[] comparisons = {">=", ">", "=", "<", "<="};
-        comparisonComboBox = new JComboBox<>(comparisons);
+        String[][] comparisonOptions = {
+                {">=", ">", "=", "<", "<="}, // for capSpace
+                {"contains", "starts with", "equals", "ends with"}  // for any of the strings attributes
+        };
 
         textFieldValue = new JTextField(10);
 
         JButton selectButton = new JButton("Select Teams");
         selectButton.addActionListener(this::selectTeams);
 
+        comparisonComboBox = new JComboBox<>(comparisonOptions[1]); // set comparison to strings options bc teamName is first attribute
+
+        attributeComboBox.addActionListener(e -> {
+            int selectedIndex = attributeComboBox.getSelectedIndex();
+            if (selectedIndex == 1) {
+                comparisonComboBox.setModel(new DefaultComboBoxModel<>(comparisonOptions[0]));
+            } else {
+                comparisonComboBox.setModel(new DefaultComboBoxModel<>(comparisonOptions[1]));
+            }
+        });
+
         filterPanel.add(attributeComboBox);
         filterPanel.add(comparisonComboBox);
         filterPanel.add(textFieldValue);
         filterPanel.add(selectButton, BorderLayout.SOUTH);
-        filterPanel.add(label);
 
         return filterPanel;
     }
@@ -133,6 +145,21 @@ public class SelectPanel extends JPanel {
         String attribute = (String) attributeComboBox.getSelectedItem();
         String comparison = (String) comparisonComboBox.getSelectedItem();
         String value = textFieldValue.getText();
+
+        int selectedIndex = attributeComboBox.getSelectedIndex();
+
+        if (selectedIndex == 1) {
+            try {
+                Integer.parseInt(textFieldValue.getText());
+            } catch (NumberFormatException ex) {
+                try {
+                    throw new InvalidNumException("Cap Space Value");
+                } catch (InvalidNumException nex) {
+                    JOptionPane.showMessageDialog(this, nex.getMessage());
+                    return;
+                }
+            }
+        }
 
         try {
             Team[] teams = delegate.selectTeams(attribute, comparison, value);
