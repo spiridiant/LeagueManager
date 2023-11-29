@@ -51,6 +51,11 @@ public class MenuPanel extends JPanel {
              cl.show(leagueManager, "join");
          });
 
+        JButton groupBy = new JButton("Group By");
+        groupBy.addActionListener(e -> {
+            cl.show(leagueManager, "group_by");
+        });
+
         JButton nested = new JButton("Nested");
         nested.addActionListener(e -> {
             cl.show(leagueManager, "nested");
@@ -71,6 +76,7 @@ public class MenuPanel extends JPanel {
         update.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         select.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         join.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        groupBy.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         nested.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         division.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         quit.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -80,6 +86,7 @@ public class MenuPanel extends JPanel {
         update.setMaximumSize(BUTTON_SIZE);
         select.setMaximumSize(BUTTON_SIZE);
         join.setMaximumSize(BUTTON_SIZE);
+        groupBy.setMaximumSize(BUTTON_SIZE);
         nested.setMaximumSize(BUTTON_SIZE);
         division.setMaximumSize(BUTTON_SIZE);
         quit.setMaximumSize(BUTTON_SIZE);
@@ -95,6 +102,8 @@ public class MenuPanel extends JPanel {
         add(select);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(join);
+        add(Box.createVerticalStrut(GAP_HEIGHT));
+        add(groupBy);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(nested);
         add(Box.createVerticalStrut(GAP_HEIGHT));

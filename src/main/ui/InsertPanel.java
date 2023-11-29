@@ -1,5 +1,7 @@
 package main.ui;
 
+import main.Exception.InvalidDateException;
+import main.Exception.InvalidNumException;
 import main.Exception.NonExistentTeamException;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Player;
@@ -91,6 +93,27 @@ public class InsertPanel extends JPanel {
     }
 
     public void insertPlayer() {
+        String yearSignedStr = textFieldYearSigned.getText();
+        String dobStr = textFieldDOB.getText();
+
+        if (!isValidDateFormat(yearSignedStr)) {
+            try {
+                throw new InvalidDateException("Year Signed");
+            } catch (InvalidDateException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                return;
+            }
+        }
+
+        if (!isValidDateFormat(dobStr)) {
+            try {
+                throw new InvalidDateException("Date of Birth");
+            } catch (InvalidDateException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                return;
+            }
+        }
+
         LocalDateTime yearSigned = LocalDateTime.parse(textFieldYearSigned.getText() + "T00:00");
         LocalDateTime dob = LocalDateTime.parse(textFieldDOB.getText() + "T00:00");
         String height = textFieldHeight.getText();
@@ -108,8 +131,30 @@ public class InsertPanel extends JPanel {
             isUnique = checkUniquePID(intPID);
         } while (!isUnique);
 
-        int intHeight = Integer.parseInt(height);
-        int intJNum = Integer.parseInt(jerseyNum);
+        int intHeight;
+        try {
+            intHeight = Integer.parseInt(height);
+        } catch (NumberFormatException e) {
+            try {
+                throw new InvalidNumException("Height");
+            } catch (InvalidNumException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                return;
+            }
+        }
+
+        // Validate jersey number input
+        int intJNum;
+        try {
+            intJNum = Integer.parseInt(jerseyNum);
+        } catch (NumberFormatException e) {
+            try {
+                throw new InvalidNumException("Jersey Number");
+            } catch (InvalidNumException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                return;
+            }
+        }
 
         try {
             boolean inserted = delegate.insertPlayer(yearSigned, dob, intHeight, name, intJNum, intPID, teamName, cityName);
@@ -187,5 +232,35 @@ public class InsertPanel extends JPanel {
         }
 
         tableModel.fireTableDataChanged();
+    }
+
+    private boolean isValidDateFormat(String dateStr) {
+        try {
+            if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) { // passes first check of dashes and numbers
+                int year = Integer.parseInt(dateStr.substring(0, 4));
+                int month = Integer.parseInt(dateStr.substring(5, 7));
+                int day = Integer.parseInt(dateStr.substring(8, 10));
+
+                if ((month == 0) || (day == 0) || (day > 31) || (month > 12)) {
+                    return false;
+                }
+
+                if (month == 2) {
+                    if (day > 29) {
+                        return false;
+                    } else if (day == 29) {
+                        return (year % 4) == 0;
+                    } else {
+                        return day > 0;
+                    }
+                }
+                if (day == 31) {
+                    return ((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12));
+                }
+                return true;
+            } return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

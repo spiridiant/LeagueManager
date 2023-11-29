@@ -3,7 +3,6 @@ package main.ui;
 import main.Exception.NoAttributeSelectedException;
 import main.Exception.NoComparatorSelectedException;
 import main.delegates.TerminalOperationDelegate;
-import main.model.Player;
 import main.model.Team;
 
 import javax.swing.*;
@@ -47,10 +46,6 @@ public class SelectPanel extends JPanel {
         centerPanel.setBackground(new Color(22, 30, 51));
         makeTeamPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
-
-        JButton selectButton = new JButton("Select Teams");
-        selectButton.addActionListener(this::selectTeams);
-        add(selectButton, BorderLayout.SOUTH);
     }
 
     private void setElements() {
@@ -83,9 +78,13 @@ public class SelectPanel extends JPanel {
 
         textFieldValue = new JTextField(10);
 
+        JButton selectButton = new JButton("Select Teams");
+        selectButton.addActionListener(this::selectTeams);
+
         filterPanel.add(attributeComboBox);
         filterPanel.add(comparisonComboBox);
         filterPanel.add(textFieldValue);
+        filterPanel.add(selectButton, BorderLayout.SOUTH);
         filterPanel.add(label);
 
         return filterPanel;

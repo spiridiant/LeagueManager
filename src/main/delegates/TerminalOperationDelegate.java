@@ -17,6 +17,7 @@ public interface TerminalOperationDelegate {
     public boolean updateContract(Contract contract, String Length,String bonus) throws NullContractException, InvalidBonusException, InvalidLengthException;
     public Team[] selectTeams(String attribute, String comparison, String value) throws NoAttributeSelectedException, NoComparatorSelectedException;
     public TeamStaff[] getTeamStaffInfo(String input) throws InvalidSalaryException;
+    public SponsorSponsoredAmount[] getSponsoredAmounts();
     public int getHigherThanAvgContractByLength(int length);
     public Sponsor[] getSponsors();
     public Team[] getTeamSponsoredByAll();
