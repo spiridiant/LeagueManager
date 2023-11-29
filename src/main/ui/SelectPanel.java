@@ -35,8 +35,8 @@ public class SelectPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        JPanel filterPanel = createFilterPanel(); // Create the filter panel
-        add(filterPanel, BorderLayout.NORTH);    // Add the filter panel to the top (North)
+        JPanel filterPanel = createFilterPanel();
+        add(filterPanel, BorderLayout.NORTH);
 
         tableModel = new DefaultTableModel();
 
@@ -93,7 +93,7 @@ public class SelectPanel extends JPanel {
     public void makeTeamPanel(JPanel centerPanel) {
         centerPanel.removeAll();
 
-        JPanel filterPanel = createFilterPanel(); // Create the filter panel
+        JPanel filterPanel = createFilterPanel();
 
         Team[] teamsArray = delegate.getTeamInfo();
 
@@ -123,10 +123,10 @@ public class SelectPanel extends JPanel {
         teamSelectPanel.setPreferredSize(new Dimension(600, 445));
         teamSelectPanel.setLayout(new BoxLayout(teamSelectPanel, BoxLayout.Y_AXIS));
 
-        teamSelectPanel.add(filterPanel); // Add filterPanel to teamSelectPanel
-        teamSelectPanel.add(scrollPane); // Add scrollPane to teamSelectPanel
+        teamSelectPanel.add(filterPanel);
+        teamSelectPanel.add(scrollPane);
 
-        centerPanel.add(teamSelectPanel, BorderLayout.CENTER); // Use BorderLayout.CENTER for teamSelectPanel
+        centerPanel.add(teamSelectPanel, BorderLayout.CENTER);
     }
 
     private void selectTeams(ActionEvent e) {

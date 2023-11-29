@@ -139,7 +139,6 @@ public class DatabaseConnectionHandler {
                 ps.setObject(2, dob);
             }
 
-            // replace number with null or zero, figure out how to modify input
             ps.setInt(3, height);
             ps.setString(4, name);
             ps.setInt(5, jerseyNum);

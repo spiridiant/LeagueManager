@@ -143,7 +143,6 @@ public class InsertPanel extends JPanel {
             }
         }
 
-        // Validate jersey number input
         int intJNum;
         try {
             intJNum = Integer.parseInt(jerseyNum);
