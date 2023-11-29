@@ -148,7 +148,7 @@ public class InsertPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(playerTable);
         scrollPane.setPreferredSize(new Dimension(600, 300));
 
-        JPanel inputPanel = new JPanel(new GridLayout(8, 2));
+        JPanel inputPanel = new JPanel(new GridLayout(7, 2));
         inputPanel.add(new JLabel("Year Signed (YYYY-MM-DD):"));
         inputPanel.add(textFieldYearSigned);
         inputPanel.add(new JLabel("Date of Birth (YYYY-MM-DD):"));

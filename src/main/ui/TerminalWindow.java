@@ -32,6 +32,9 @@ public class TerminalWindow extends JFrame {
         UpdatePanel updatePanel = new UpdatePanel(cl, leagueManager, delegate);
         leagueManager.add(updatePanel, "update");
 
+        SelectPanel selectPanel = new SelectPanel(cl, leagueManager, delegate);
+        leagueManager.add(selectPanel, "select");
+
         JoinPanel joinPanel = new JoinPanel(cl, leagueManager, delegate);
         leagueManager.add(joinPanel, "join");
 
@@ -46,6 +49,7 @@ public class TerminalWindow extends JFrame {
         insertPanel.setBackground(BACKGROUND_COLOR);
         deletePanel.setBackground(BACKGROUND_COLOR);
         updatePanel.setBackground(BACKGROUND_COLOR);
+        selectPanel.setBackground(BACKGROUND_COLOR);
         joinPanel.setBackground(BACKGROUND_COLOR);
         nestedAggregationPanel.setBackground(BACKGROUND_COLOR);
         divisionPanel.setBackground(BACKGROUND_COLOR);

@@ -64,6 +64,9 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     @Override
     public Player[] getPlayerInfo() { return dbHandler.getPlayerInfo(); }
 
+    @Override
+    public Team[] getTeamInfo() { return dbHandler.getTeamInfo(); }
+
     /**
      * TerminalOperationDelegate Implementation
      *
@@ -126,6 +129,46 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     @Override
     public boolean deletePlayer(int pid) {
         return dbHandler.deletePlayer(pid);
+    }
+
+    @Override
+    public Team[] selectTeams(String attribute, String comparison, String value) throws NoAttributeSelectedException, NoComparatorSelectedException {
+        String sqlAtt = "";
+        switch (attribute) {
+            case "Team Name":
+                sqlAtt = "TName";
+                break;
+            case "Cap Space":
+                sqlAtt = "Cap_Space";
+                break;
+            case "Arena":
+                sqlAtt = "Arena";
+                break;
+            case "City Name":
+                sqlAtt = "City";
+                break;
+            case "Division Name":
+                sqlAtt = "DName";
+                break;
+            default:
+                throw new NoAttributeSelectedException();
+        }
+
+        switch (comparison) {
+            case ">":
+                break;
+            case ">=":
+                break;
+            case "<":
+                break;
+            case "<=":
+                break;
+            case "=":
+                break;
+            default:
+                throw new NoComparatorSelectedException();
+        }
+        return dbHandler.selectTeams(sqlAtt, comparison, value);
     }
 
     @Override
