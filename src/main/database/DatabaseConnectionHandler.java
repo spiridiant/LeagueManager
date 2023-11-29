@@ -98,6 +98,72 @@ public class DatabaseConnectionHandler {
         return c;
     }
 
+    public boolean checkTeamExists(String teamName, String cityName) {
+        try {
+            String query = "SELECT COUNT(*) FROM Team WHERE TName = ? AND City = ?";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ps.setString(1, teamName);
+            ps.setString(2, cityName);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City) {
+
+        String query = "INSERT INTO Player_Plays_for_Team VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            connection.setAutoCommit(false);
+
+            if (debutYear == null) {
+                ps.setNull(1, java.sql.Types.NULL);
+            } else {
+                ps.setObject(1, debutYear);
+            }
+
+            if (dob == null) {
+                ps.setNull(2, java.sql.Types.NULL);
+            } else {
+                ps.setObject(2, dob);
+            }
+
+            // replace number with null or zero, figure out how to modify input
+            ps.setInt(3, height);
+            ps.setString(4, name);
+            ps.setInt(5, jerseyNum);
+            ps.setInt(6, pid);
+            ps.setString(7, tName);
+            ps.setString(8, City);
+
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                connection.commit();
+                System.out.println("Player added successfully.");
+            } else {
+                connection.rollback();
+                System.out.println("Player could not be added.");
+            }
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean deletePlayer(int pid) {
         String query = "DELETE FROM Player_Plays_for_Team WHERE PID = ?";
         String query2 = "DELETE FROM Signed_Contract WHERE PID = ?";

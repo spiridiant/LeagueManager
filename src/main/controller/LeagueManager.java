@@ -1,9 +1,6 @@
 package main.controller;
 
-import main.Exception.InvalidBonusException;
-import main.Exception.InvalidLengthException;
-import main.Exception.InvalidSalaryException;
-import main.Exception.NullContractException;
+import main.Exception.*;
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
@@ -12,6 +9,7 @@ import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 
 public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDelegate {
     private DatabaseConnectionHandler dbHandler = null;
@@ -112,6 +110,17 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
         } catch(NumberFormatException e) {
             throw new InvalidSalaryException();
         }
+    }
+
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String teamName, String cityName) throws NonExistentTeamException {
+
+        boolean teamExists = dbHandler.checkTeamExists(teamName, cityName);
+
+        if (!teamExists) {
+            throw new NonExistentTeamException();
+        }
+
+        return dbHandler.insertPlayer(debutYear, dob, height, name, jerseyNum, pid, teamName, cityName);
     }
 
     @Override

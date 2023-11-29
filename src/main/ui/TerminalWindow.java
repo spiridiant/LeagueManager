@@ -23,7 +23,7 @@ public class TerminalWindow extends JFrame {
         MenuPanel menuPanel = new MenuPanel(cl, leagueManager);
         leagueManager.add(menuPanel, "menu");
 
-        InsertPanel insertPanel = new InsertPanel(cl, leagueManager);
+        InsertPanel insertPanel = new InsertPanel(cl, leagueManager, delegate);
         leagueManager.add(insertPanel, "insert");
 
         DeletePanel deletePanel = new DeletePanel(cl, leagueManager, delegate);
