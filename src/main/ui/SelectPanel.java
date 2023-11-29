@@ -28,7 +28,7 @@ public class SelectPanel extends JPanel {
 
     public SelectPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        this.setBackground(new Color(34, 34, 34));
+        this.setBackground(new Color(22, 30, 51));
 
         this.delegate = delegate;
         this.cl = cl;
@@ -44,7 +44,7 @@ public class SelectPanel extends JPanel {
         setElements();
 
         centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makeTeamPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
 
@@ -120,7 +120,7 @@ public class SelectPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(600, 300));
 
         JPanel teamSelectPanel = new JPanel();
-        teamSelectPanel.setBackground(new Color(34, 34, 34));
+        teamSelectPanel.setBackground(new Color(22, 30, 51));
         teamSelectPanel.setPreferredSize(new Dimension(600, 445));
         teamSelectPanel.setLayout(new BoxLayout(teamSelectPanel, BoxLayout.Y_AXIS));
 
