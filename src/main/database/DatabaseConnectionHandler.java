@@ -98,6 +98,26 @@ public class DatabaseConnectionHandler {
         return c;
     }
 
+    public boolean checkTeamExists(String teamName, String cityName) {
+        try {
+            String query = "SELECT COUNT(*) FROM Team WHERE TName = ? AND City = ?";
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+            ps.setString(1, teamName);
+            ps.setString(2, cityName);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return false;
+    }
+
     public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City) {
 
         String query = "INSERT INTO Player_Plays_for_Team VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

@@ -1,5 +1,6 @@
 package main.ui;
 
+import main.Exception.NonExistentTeamException;
 import main.delegates.TerminalOperationDelegate;
 import main.model.Player;
 
@@ -110,6 +111,7 @@ public class InsertPanel extends JPanel {
         int intHeight = Integer.parseInt(height);
         int intJNum = Integer.parseInt(jerseyNum);
 
+        try {
             boolean inserted = delegate.insertPlayer(yearSigned, dob, intHeight, name, intJNum, intPID, teamName, cityName);
             if (inserted) {
                 JOptionPane.showMessageDialog(this, "Player inserted.");
@@ -117,6 +119,9 @@ public class InsertPanel extends JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Unable to add Player");
             }
+        } catch (NonExistentTeamException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 
     public void makePlayerPanel(JPanel centerPanel) {

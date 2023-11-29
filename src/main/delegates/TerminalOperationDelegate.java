@@ -1,9 +1,6 @@
 package main.delegates;
 
-import main.Exception.InvalidBonusException;
-import main.Exception.InvalidLengthException;
-import main.Exception.InvalidSalaryException;
-import main.Exception.NullContractException;
+import main.Exception.*;
 import main.model.*;
 
 import java.io.FileNotFoundException;
@@ -13,7 +10,7 @@ public interface TerminalOperationDelegate {
     public Contract[] getContractInfo();
 
     public Player[] getPlayerInfo();
-    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City);
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String teamName, String cityName) throws NonExistentTeamException;
     public boolean deletePlayer(int pid);
     public void databaseSetup() throws FileNotFoundException;
     public boolean updateContract(Contract contract, String Length,String bonus) throws NullContractException, InvalidBonusException, InvalidLengthException;

@@ -1,9 +1,6 @@
 package main.controller;
 
-import main.Exception.InvalidBonusException;
-import main.Exception.InvalidLengthException;
-import main.Exception.InvalidSalaryException;
-import main.Exception.NullContractException;
+import main.Exception.*;
 import main.database.DatabaseConnectionHandler;
 import main.delegates.LoginWindowDelegate;
 import main.delegates.TerminalOperationDelegate;
@@ -115,9 +112,15 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
         }
     }
 
-    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City) {
-        // insert check for conflicting pid
-        return dbHandler.insertPlayer(debutYear, dob, height, name, jerseyNum, pid, tName, City);
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String teamName, String cityName) throws NonExistentTeamException {
+
+        boolean teamExists = dbHandler.checkTeamExists(teamName, cityName);
+
+        if (!teamExists) {
+            throw new NonExistentTeamException();
+        }
+
+        return dbHandler.insertPlayer(debutYear, dob, height, name, jerseyNum, pid, teamName, cityName);
     }
 
     @Override
