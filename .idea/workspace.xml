@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67100644-6e85-4175-8724-858fa732d557" name="Changes" comment="Implemented Projection.">
-      <change afterPath="$PROJECT_DIR$/src/main/model/TeamPlayerHeight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ui/HavingPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ui/ProjectionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/controller/LeagueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/controller/LeagueManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java" afterDir="false" />
+    <list default="true" id="67100644-6e85-4175-8724-858fa732d557" name="Changes" comment="Potential merge with master">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ui/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/LoginWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ui/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/MenuPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ui/ProjectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/ProjectionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ui/TerminalWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/TerminalWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/ui/MenuPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/ui/MenuPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/ui/ProjectionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/ui/ProjectionPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/ui/TerminalWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/ui/TerminalWindow.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,31 @@
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="Potential merge with master">
+      <option name="closed" value="true" />
+      <created>1701247476768</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701247476768</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Potential merge with master">
+      <option name="closed" value="true" />
+      <created>1701247481093</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701247481093</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Potential merge with master">
+      <option name="closed" value="true" />
+      <created>1701247645273</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701247645273</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -67,5 +94,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Potential merge with master" />
+    <option name="LAST_COMMIT_MESSAGE" value="Potential merge with master" />
   </component>
 </project>

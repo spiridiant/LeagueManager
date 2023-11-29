@@ -89,10 +89,6 @@ public class ProjectionPanel extends JPanel {
             if (selectedTable != null) {
                 String[] attributes = delegate.getAllAttributes(selectedTable);
 
-//                checkBoxContainer.removeAll();
-//                checkBoxContainer.revalidate();
-//                checkBoxContainer.repaint();
-
                 JPanel checkBoxPanel = new JPanel();
                 checkBoxPanel.setLayout(new GridLayout(0, 1));
 
@@ -193,12 +189,12 @@ public class ProjectionPanel extends JPanel {
         playerTable = new JTable(tableModel);
 
         scrollPane = new JScrollPane(playerTable);
-        scrollPane.setPreferredSize(new Dimension(600, 300));
+        scrollPane.setPreferredSize(new Dimension(900, 300));
 
         playerSelectPanel = new JPanel();
         playerSelectPanel.setBackground(new Color(34, 34, 34));
 
-        playerSelectPanel.setPreferredSize(new Dimension(600, 445));
+        playerSelectPanel.setPreferredSize(new Dimension(900, 445));
 
         playerSelectPanel.setLayout(new BoxLayout(playerSelectPanel, BoxLayout.Y_AXIS));
 
@@ -235,10 +231,6 @@ public class ProjectionPanel extends JPanel {
             if (selectedTable != null) {
                 String[] attributes = delegate.getAllAttributes(selectedTable);
 
-//                checkBoxContainer.removeAll();
-//                checkBoxContainer.revalidate();
-//                checkBoxContainer.repaint();
-
                 JPanel checkBoxPanel = new JPanel();
                 checkBoxPanel.setLayout(new GridLayout(0, 1));
 
@@ -338,12 +330,12 @@ public class ProjectionPanel extends JPanel {
 
         playerTable = new JTable(tableModel);
         scrollPane = new JScrollPane(playerTable);
-        scrollPane.setPreferredSize(new Dimension(600, 300));
+        scrollPane.setPreferredSize(new Dimension(900, 300));
 
         playerSelectPanel = new JPanel();
         playerSelectPanel.setBackground(new Color(34, 34, 34));
 
-        playerSelectPanel.setPreferredSize(new Dimension(600, 445));
+        playerSelectPanel.setPreferredSize(new Dimension(900, 445));
 
         playerSelectPanel.setLayout(new BoxLayout(playerSelectPanel, BoxLayout.Y_AXIS));
 
