@@ -12,6 +12,7 @@ import main.ui.LoginWindow;
 import main.ui.TerminalWindow;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 
 public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDelegate {
     private DatabaseConnectionHandler dbHandler = null;
@@ -112,6 +113,11 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
         } catch(NumberFormatException e) {
             throw new InvalidSalaryException();
         }
+    }
+
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City) {
+        // insert check for conflicting pid
+        return dbHandler.insertPlayer(debutYear, dob, height, name, jerseyNum, pid, tName, City);
     }
 
     @Override

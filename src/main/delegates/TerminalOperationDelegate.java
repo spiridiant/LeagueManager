@@ -7,11 +7,13 @@ import main.Exception.NullContractException;
 import main.model.*;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 
 public interface TerminalOperationDelegate {
     public Contract[] getContractInfo();
 
     public Player[] getPlayerInfo();
+    public boolean insertPlayer(LocalDateTime debutYear, LocalDateTime dob, int height, String name, int jerseyNum, int pid, String tName, String City);
     public boolean deletePlayer(int pid);
     public void databaseSetup() throws FileNotFoundException;
     public boolean updateContract(Contract contract, String Length,String bonus) throws NullContractException, InvalidBonusException, InvalidLengthException;
