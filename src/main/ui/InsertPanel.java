@@ -32,7 +32,7 @@ public class InsertPanel extends JPanel {
 
     public InsertPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        this.setBackground(new Color(34, 34, 34));
+        this.setBackground(new Color(22, 30, 51));
 
         this.delegate = delegate;
         this.cl = cl;
@@ -43,7 +43,7 @@ public class InsertPanel extends JPanel {
         setLayout(new BorderLayout());
         setElements();
         centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makePlayerPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }
@@ -165,7 +165,7 @@ public class InsertPanel extends JPanel {
         inputPanel.add(textFieldCityName);
 
         JPanel playerSelectPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
         playerSelectPanel.setPreferredSize(new Dimension(600, 445));
         playerSelectPanel.setLayout(new BoxLayout(playerSelectPanel, BoxLayout.Y_AXIS));
 
