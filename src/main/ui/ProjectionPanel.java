@@ -64,7 +64,7 @@ public class ProjectionPanel extends JPanel {
 
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makeProjectionPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }
