@@ -35,11 +35,17 @@ public class TerminalWindow extends JFrame {
         SelectPanel selectPanel = new SelectPanel(cl, leagueManager, delegate);
         leagueManager.add(selectPanel, "select");
 
+        ProjectionPanel projectPanel = new ProjectionPanel(cl,leagueManager,delegate);
+        leagueManager.add(projectPanel,"project");
+
         JoinPanel joinPanel = new JoinPanel(cl, leagueManager, delegate);
         leagueManager.add(joinPanel, "join");
 
         GroupByPanel groupByPanel = new GroupByPanel(cl, leagueManager, delegate);
         leagueManager.add(groupByPanel, "group_by");
+
+        HavingPanel havingPanel = new HavingPanel(cl,leagueManager,delegate);
+        leagueManager.add(havingPanel,"having");
 
         NestedAggregationPanel nestedAggregationPanel = new NestedAggregationPanel(cl, leagueManager, delegate);
         leagueManager.add(nestedAggregationPanel, "nested");
@@ -47,24 +53,18 @@ public class TerminalWindow extends JFrame {
         DivisionPanel divisionPanel = new DivisionPanel(cl, leagueManager, delegate);
         leagueManager.add(divisionPanel, "division");
 
-        ProjectionPanel projectPanel = new ProjectionPanel(cl,leagueManager,delegate);
-        leagueManager.add(projectPanel,"project");
-
-        HavingPanel havingPanel = new HavingPanel(cl,leagueManager,delegate);
-        leagueManager.add(havingPanel,"having");
-
         leagueManager.setBackground(BACKGROUND_COLOR);
         menuPanel.setBackground(BACKGROUND_COLOR);
         insertPanel.setBackground(BACKGROUND_COLOR);
         deletePanel.setBackground(BACKGROUND_COLOR);
         updatePanel.setBackground(BACKGROUND_COLOR);
         selectPanel.setBackground(BACKGROUND_COLOR);
+        projectPanel.setBackground(BACKGROUND_COLOR);
         joinPanel.setBackground(BACKGROUND_COLOR);
         groupByPanel.setBackground(BACKGROUND_COLOR);
+        havingPanel.setBackground(BACKGROUND_COLOR);
         nestedAggregationPanel.setBackground(BACKGROUND_COLOR);
         divisionPanel.setBackground(BACKGROUND_COLOR);
-        projectPanel.setBackground(BACKGROUND_COLOR);
-        havingPanel.setBackground(BACKGROUND_COLOR);
 
         cl.show(leagueManager, "menu");
         add(leagueManager);
