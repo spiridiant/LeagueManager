@@ -47,7 +47,7 @@ public class HavingPanel extends JPanel {
 
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makeHavingPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }
@@ -71,7 +71,7 @@ public class HavingPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(600, 300));
 
         JPanel playerSelectPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
         playerSelectPanel.setPreferredSize(new Dimension(600, 445));
         playerSelectPanel.setLayout(new BoxLayout(playerSelectPanel, BoxLayout.Y_AXIS));
 
