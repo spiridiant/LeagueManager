@@ -1,5 +1,5 @@
 NOTE: Due to an issue with our master branch, please look at master-fix instead of our
-master branch for the most up-to-date code.**
+master branch for the most up-to-date code.
 
 Project Description
 
