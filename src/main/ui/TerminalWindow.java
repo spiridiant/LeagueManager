@@ -47,12 +47,6 @@ public class TerminalWindow extends JFrame {
         DivisionPanel divisionPanel = new DivisionPanel(cl, leagueManager, delegate);
         leagueManager.add(divisionPanel, "division");
 
-        ProjectionPanel projectPanel = new ProjectionPanel(cl,leagueManager,delegate);
-        leagueManager.add(projectPanel,"project");
-
-        HavingPanel havingPanel = new HavingPanel(cl,leagueManager,delegate);
-        leagueManager.add(havingPanel,"having");
-
         leagueManager.setBackground(BACKGROUND_COLOR);
         menuPanel.setBackground(BACKGROUND_COLOR);
         insertPanel.setBackground(BACKGROUND_COLOR);
@@ -63,8 +57,6 @@ public class TerminalWindow extends JFrame {
         groupByPanel.setBackground(BACKGROUND_COLOR);
         nestedAggregationPanel.setBackground(BACKGROUND_COLOR);
         divisionPanel.setBackground(BACKGROUND_COLOR);
-        projectPanel.setBackground(BACKGROUND_COLOR);
-        havingPanel.setBackground(BACKGROUND_COLOR);
 
 
         cl.show(leagueManager, "menu");

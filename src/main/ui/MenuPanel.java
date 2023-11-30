@@ -66,16 +66,6 @@ public class MenuPanel extends JPanel {
             cl.show(leagueManager, "division");
         });
 
-        JButton project = new JButton("project");
-        project.addActionListener(e -> {
-            cl.show(leagueManager, "project");
-        });
-
-        JButton having = new JButton("Find Player Hegihts");
-        having.addActionListener(e -> {
-            cl.show(leagueManager, "having");
-        });
-
         JButton quit = new JButton("Quit");
         quit.addActionListener(e -> {
             System.exit(0);
@@ -89,8 +79,6 @@ public class MenuPanel extends JPanel {
         groupBy.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         nested.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         division.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        project.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-        having.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         quit.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         insert.setMaximumSize(BUTTON_SIZE);
@@ -101,8 +89,6 @@ public class MenuPanel extends JPanel {
         groupBy.setMaximumSize(BUTTON_SIZE);
         nested.setMaximumSize(BUTTON_SIZE);
         division.setMaximumSize(BUTTON_SIZE);
-        project.setMaximumSize(BUTTON_SIZE);
-        having.setMaximumSize(BUTTON_SIZE);
         quit.setMaximumSize(BUTTON_SIZE);
 
         add(Box.createVerticalStrut(LOGO_HEIGHT));
@@ -122,10 +108,6 @@ public class MenuPanel extends JPanel {
         add(nested);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(division);
-        add(Box.createVerticalStrut(GAP_HEIGHT));
-        add(project);
-        add(Box.createVerticalStrut(GAP_HEIGHT));
-        add(having);
         add(Box.createVerticalStrut(GAP_HEIGHT));
         add(quit);
     }

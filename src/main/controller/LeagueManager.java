@@ -205,22 +205,4 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     public Team[] getTeamSponsoredByAll() {
         return dbHandler.getTeamSponsoredByAll();
     }
-
-    @Override
-    public TeamPlayerHeight[] getPlayerHeights(String team) { return dbHandler.getPlayerHeights(team); }
-
-    @Override
-    public String[] getAllTeams() {return dbHandler.getAllTeams();}
-
-    @Override
-    public double getAverageHeights(String team) { return dbHandler.getAverageHeights(team);}
-
-    @Override
-    public String[] getAllTables() {return dbHandler.getAllTables();}
-
-    @Override
-    public String[] getAllAttributes(String table) {return dbHandler.getAllAttributes(table);}
-
-    @Override
-    public Object[] addAttributes(String[] attributes, String table) {return dbHandler.addAttributes(attributes, table);}
 }
