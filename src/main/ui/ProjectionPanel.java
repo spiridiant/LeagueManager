@@ -192,7 +192,7 @@ public class ProjectionPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(900, 300));
 
         playerSelectPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
 
         playerSelectPanel.setPreferredSize(new Dimension(900, 445));
 
@@ -333,7 +333,7 @@ public class ProjectionPanel extends JPanel {
         scrollPane.setPreferredSize(new Dimension(900, 300));
 
         playerSelectPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
 
         playerSelectPanel.setPreferredSize(new Dimension(900, 445));
 
