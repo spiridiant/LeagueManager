@@ -1,4 +1,7 @@
-Project Description
+**NOTE: Due to an issue with our master branch, please look at master-fix instead of our
+master branch for the most up-to-date code.**
+
+## Project Description
 
 This project revolves around a database system that tracks various aspects of
 basketball leagues, including sponsors, teams, revenue, and players. The domain of the
