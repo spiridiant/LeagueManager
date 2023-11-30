@@ -1,0 +1,66 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"20ae75ad-4c12-4a84-bb47-de184e733597\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/src/main/controller/LeagueManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/controller/LeagueManager.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/ui/ProjectionPanel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/ui/ProjectionPanel.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CompilerWorkspaceConfiguration\">\n    <option name=\"MAKE_PROJECT_ON_SAVE\" value=\"true\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"2YnBglxb9H1FAqxtgS0NypD2evM\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"project.structure.last.edited\": \"Project\",\n    \"project.structure.proportion\": \"0.0\",\n    \"project.structure.side.proportion\": \"0.0\",\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"20ae75ad-4c12-4a84-bb47-de184e733597\" name=\"Changes\" comment=\"\" />\n      <created>1701151577947</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1701151577947</updated>\n      <workItem from=\"1701151579829\" duration=\"97000\" />\n      <workItem from=\"1701151693551\" duration=\"25919000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n  </component>\n</project>
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,12 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="20ae75ad-4c12-4a84-bb47-de184e733597" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/main/controller/LeagueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/controller/LeagueManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/database/DatabaseConnectionHandler.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/delegates/TerminalOperationDelegate.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/ui/ProjectionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/ProjectionPanel.java" afterDir="false" />
+-    </list>
++    <list default="true" id="20ae75ad-4c12-4a84-bb47-de184e733597" name="Changes" comment="Implemented Projection." />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -49,7 +44,6 @@
+     "ASKED_ADD_EXTERNAL_FILES": "true",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "WebServerToolWindowFactoryState": "false",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+@@ -71,8 +65,25 @@
+       <option name="presentableId" value="Default" />
+       <updated>1701151577947</updated>
+       <workItem from="1701151579829" duration="97000" />
+-      <workItem from="1701151693551" duration="25919000" />
++      <workItem from="1701151693551" duration="26630000" />
+     </task>
++    <task id="LOCAL-00001" summary="Implemented Projection.">
++      <option name="closed" value="true" />
++      <created>1701219394405</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1701219394405</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Implemented Projection.">
++      <option name="closed" value="true" />
++      <created>1701219517560</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1701219517560</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -91,5 +102,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="Implemented Projection." />
++    <option name="LAST_COMMIT_MESSAGE" value="Implemented Projection." />
+   </component>
+ </project>
+\ No newline at end of file

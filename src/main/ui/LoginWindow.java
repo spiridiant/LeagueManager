@@ -151,6 +151,6 @@ public class LoginWindow extends JFrame implements ActionListener {
 		delegate.login(usernameField.getText(), String.valueOf(passwordField.getPassword()));
 //		delegate.login("ora_fgu05", "a22292734");
         // delegate.login("ora_susan328", "a83200188");
-        //delegate.login("ora_kookevk", "a16389124");
+//        delegate.login("ora_kookevk", "a16389124");
 	}
 }

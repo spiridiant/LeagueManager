@@ -211,16 +211,6 @@ public class DatabaseConnectionHandler {
                 String team = rs.getString("TName");
                 String city = rs.getString("City");
 
-//                Player model = new Player(
-//                        rs.getObject("Debut_Year", LocalDateTime.class),
-//                        rs.getObject("Date_of_Birth", LocalDateTime.class),
-//                        rs.getInt("Height"),
-//                        rs.getString("Name"),
-//                        rs.getInt("Jersey#"),
-//                        rs.getInt("PID"),
-//                        rs.getString("TName"),
-//                        rs.getString("City"));
-
 
                 Player model = new Player(
                         debut,
@@ -489,6 +479,189 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new Sponsor[result.size()]);
+    }
+
+    public double getAverageHeights(String team) {
+        double result = 0;
+
+        try {
+            String query1 = "SELECT AVG(Height) AS AvgHeight FROM Player_Plays_For_Team WHERE TName = ?";
+
+            PrintablePreparedStatement ps1 = new PrintablePreparedStatement(connection.prepareStatement(query1), query1, false);
+
+            ps1.setString(1, team);
+            ResultSet rs1 = ps1.executeQuery();
+
+            if (rs1.next()) {
+                result = rs1.getDouble("AvgHeight");
+                System.out.println("Average Height for Team " + team + ": " + result);
+            }
+
+            rs1.close();
+            ps1.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result;
+    }
+
+    public TeamPlayerHeight[] getPlayerHeights(String team) {
+        ArrayList<TeamPlayerHeight> result = new ArrayList<>();
+
+        try {
+
+            String query1 = "SELECT AVG(Height) AS AvgHeight FROM Player_Plays_For_Team WHERE TName = ?";
+            String query2 = "SELECT * FROM Player_Plays_For_Team WHERE Tname = ? AND " +
+                    "Height > (SELECT AVG(Height) FROM Player_Plays_For_Team WHERE TName = ?)";
+
+            PrintablePreparedStatement ps1 = new PrintablePreparedStatement(connection.prepareStatement(query1), query1, false);
+            PrintablePreparedStatement ps2 = new PrintablePreparedStatement(connection.prepareStatement(query2), query2, false);
+
+
+
+            ps1.setString(1, team);
+            ResultSet rs1 = ps1.executeQuery();
+
+            if (rs1.next()) {
+                double avgHeight = rs1.getDouble("AvgHeight");
+                System.out.println("Average Height for Team " + team + ": " + avgHeight);
+            }
+
+            ps2.setString(1, team);
+            ps2.setString(2, team);
+            ResultSet rs2 = ps2.executeQuery();
+
+            while (rs2.next()) {
+                TeamPlayerHeight playerHeight = new TeamPlayerHeight(
+                        rs2.getString("Name"),
+                        rs2.getInt("Height")
+                );
+                result.add(playerHeight);
+            }
+
+            connection.setAutoCommit(false);
+
+            rs1.close();
+            rs2.close();
+            ps1.close();
+            ps2.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new TeamPlayerHeight[result.size()]);
+    }
+
+    public String[] getAllTeams() {
+
+        ArrayList<String> result = new ArrayList<>();
+
+        String query = "SELECT DISTINCT TName FROM Team";
+
+        try {
+
+            PrintablePreparedStatement ps1 = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                result.add(rs1.getString("TName"));
+            }
+
+            connection.setAutoCommit(false);
+
+            rs1.close();
+
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result.toArray(new String[0]);
+    }
+
+    public String[] getAllTables() {
+        ArrayList<String> result = new ArrayList<>();
+
+        String query = "SELECT table_name FROM user_tables";
+
+        try {
+
+            PrintablePreparedStatement ps1 = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                result.add(rs1.getString("table_name"));
+            }
+
+            connection.setAutoCommit(false);
+
+            rs1.close();
+
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new String[0]);
+    }
+
+    public String[] getAllAttributes(String table) {
+        ArrayList<String> result = new ArrayList<>();
+
+        String query = "SELECT DISTINCT column_name FROM all_tab_columns WHERE table_name = ?";
+
+        try {
+
+            PrintablePreparedStatement ps1 = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            ps1.setString(1, table);
+
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                result.add(rs1.getString("column_name"));
+            }
+
+            connection.setAutoCommit(false);
+
+            rs1.close();
+
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new String[0]);
+    }
+
+    public Object[] addAttributes(String[] attributes, String table) {
+        ArrayList<Object> result = new ArrayList<>();
+
+        String columns = String.join(", ", attributes);
+        String query = "SELECT " + columns + " FROM " + table;
+
+        try {
+            PrintablePreparedStatement ps = new PrintablePreparedStatement(connection.prepareStatement(query), query, false);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                for (String attribute : attributes) {
+                    result.add(rs.getString(attribute));
+                }
+            }
+
+            connection.setAutoCommit(false);
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new Object[0]);
     }
 
     private void rollbackConnection() {
