@@ -21,4 +21,9 @@ public interface TerminalOperationDelegate {
     public int getHigherThanAvgContractByLength(int length);
     public Sponsor[] getSponsors();
     public Team[] getTeamSponsoredByAll();
+    public double getAverageHeights(String team);
+    public String[] getAllTeams();
+    public String[] getAllTables();
+    public String[] getAllAttributes(String table);
+    public Object[] addAttributes(String[] attributes, String table);
 }
