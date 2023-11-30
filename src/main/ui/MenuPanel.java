@@ -10,8 +10,8 @@ public class MenuPanel extends JPanel {
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
     public static final Dimension BUTTON_SIZE = new Dimension(120, 25);
-    private static final int LOGO_WIDTH = 550;
-    private static final int LOGO_HEIGHT = 350;
+    private static final int LOGO_WIDTH = 500;
+    private static final int LOGO_HEIGHT = 320;
     private static final int GAP_HEIGHT = 10;
 
     public MenuPanel(CardLayout cl, JPanel leagueManager) {
