@@ -27,5 +27,4 @@ public interface TerminalOperationDelegate {
     public String[] getAllTables();
     public String[] getAllAttributes(String table);
     public Object[] addAttributes(String[] attributes, String table);
-    public TeamPlayerHeight[] getPlayerHeights(String team);
 }
