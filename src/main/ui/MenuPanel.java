@@ -66,7 +66,7 @@ public class MenuPanel extends JPanel {
             cl.show(leagueManager, "division");
         });
         
-        JButton project = new JButton("project");
+        JButton project = new JButton("Project");
         project.addActionListener(e -> {
             cl.show(leagueManager, "project");
         });
