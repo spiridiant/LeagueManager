@@ -20,7 +20,7 @@ public class HavingPanel extends JPanel {
 
     public HavingPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        this.setBackground(new Color(34, 34, 34));
+        this.setBackground(new Color(22, 30, 51));
 
         this.delegate = delegate;
         this.cl = cl;
