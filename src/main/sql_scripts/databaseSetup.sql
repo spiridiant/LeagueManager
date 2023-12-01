@@ -228,8 +228,8 @@ VALUES (4, 'Eris', 'Just bang it!');
 INSERT INTO Sponsor
 VALUES (5, 'InfiniTech Labs', 'Limitless Possibilities, Crafted in Every Code!');
 
-INSERT INTO Sponsor
-VALUES (6, 'Additional Sponsor', 'Test division');
+-- INSERT INTO Sponsor
+-- VALUES (6, 'Additional Sponsor', 'Test division');
 
 -- Sponsor Sponsors Team
 INSERT INTO Sponsor_Sponsors_Team
