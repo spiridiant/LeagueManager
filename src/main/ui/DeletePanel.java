@@ -2,19 +2,19 @@ package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
+import main.model.ListTableModel;
 import main.model.Player;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class DeletePanel extends JPanel{
 
-    private DefaultTableModel tableModel;
-    private DefaultTableModel tableModel2;
+    private ListTableModel tableModel;
+    private ListTableModel tableModel2;
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
 
@@ -32,8 +32,8 @@ public class DeletePanel extends JPanel{
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
-        tableModel2 = new DefaultTableModel();
+        tableModel = new ListTableModel();
+        tableModel2 = new ListTableModel();
 
         setLayout(new BorderLayout());
         setElements();

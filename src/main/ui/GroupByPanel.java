@@ -1,10 +1,10 @@
 package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 import main.model.SponsorSponsoredAmount;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class GroupByPanel extends JPanel{
@@ -13,7 +13,7 @@ public class GroupByPanel extends JPanel{
     private TerminalOperationDelegate delegate;
     private CardLayout cl;
     private JPanel leagueManager;
-    private DefaultTableModel tableModel;
+    private ListTableModel tableModel;
     private JTable sponsorsTable;
     public GroupByPanel(CardLayout cl, JPanel leagueManager, TerminalOperationDelegate delegate) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -24,7 +24,7 @@ public class GroupByPanel extends JPanel{
         this.leagueManager = leagueManager;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        tableModel = new DefaultTableModel();
+        tableModel = new ListTableModel();
         sponsorsTable = new JTable(tableModel);
         makeOperationPanel();
 
