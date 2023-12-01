@@ -2,19 +2,19 @@ package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
 import main.model.Contract;
+import main.model.ListTableModel;
 import main.model.Player;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class DeletePanel extends JPanel{
 
-    private DefaultTableModel tableModel;
-    private DefaultTableModel tableModel2;
+    private ListTableModel tableModel;
+    private ListTableModel tableModel2;
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
 
@@ -32,8 +32,8 @@ public class DeletePanel extends JPanel{
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
-        tableModel2 = new DefaultTableModel();
+        tableModel = new ListTableModel();
+        tableModel2 = new ListTableModel();
 
         setLayout(new BorderLayout());
         setElements();
@@ -136,8 +136,8 @@ public class DeletePanel extends JPanel{
 
         JPanel playerSelectPanel = new JPanel();
         JPanel contractPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
-        contractPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
+        contractPanel.setBackground(new Color(22, 30, 51));
 
         playerSelectPanel.setPreferredSize(new Dimension(600, 445));
         contractPanel.setPreferredSize(new Dimension(600, 100));
@@ -156,7 +156,7 @@ public class DeletePanel extends JPanel{
 
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makePlayerPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }

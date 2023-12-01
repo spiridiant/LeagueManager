@@ -4,17 +4,17 @@ import main.Exception.InvalidDateException;
 import main.Exception.InvalidNumException;
 import main.Exception.NonExistentTeamException;
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 import main.model.Player;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 
 public class InsertPanel extends JPanel {
 
-    private DefaultTableModel tableModel;
+    private ListTableModel tableModel;
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
 
@@ -40,7 +40,7 @@ public class InsertPanel extends JPanel {
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
+        tableModel = new ListTableModel();
 
         setLayout(new BorderLayout());
         setElements();

@@ -1,6 +1,7 @@
 package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 import main.model.TeamPlayerHeight;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionEvent;
 
 public class HavingPanel extends JPanel {
 
-    private DefaultTableModel tableModel;
+    private ListTableModel tableModel;
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
 
@@ -26,7 +27,7 @@ public class HavingPanel extends JPanel {
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
+        tableModel = new ListTableModel();
 
         setLayout(new BorderLayout());
         setElements();

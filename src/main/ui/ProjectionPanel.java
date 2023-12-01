@@ -1,16 +1,16 @@
 package main.ui;
 
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class ProjectionPanel extends JPanel {
 
-    private DefaultTableModel tableModel;
+    private ListTableModel tableModel;
 
     JPanel playerSelectPanel;
 
@@ -43,7 +43,7 @@ public class ProjectionPanel extends JPanel {
         this.cl = cl;
         this.leagueManager = leagueManager;
 
-        tableModel = new DefaultTableModel();
+        tableModel = new ListTableModel();
 
         setLayout(new BorderLayout());
         setElements();

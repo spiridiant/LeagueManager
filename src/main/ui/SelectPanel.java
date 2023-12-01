@@ -4,16 +4,16 @@ import main.Exception.InvalidNumException;
 import main.Exception.NoAttributeSelectedException;
 import main.Exception.NoComparatorSelectedException;
 import main.delegates.TerminalOperationDelegate;
+import main.model.ListTableModel;
 import main.model.Team;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class SelectPanel extends JPanel {
 
-    private DefaultTableModel tableModel;
+    private ListTableModel tableModel;
 
     private static final int PANEL_WIDTH = 1080;
     private static final int PANEL_HEIGHT = 720;
@@ -40,7 +40,7 @@ public class SelectPanel extends JPanel {
         JPanel filterPanel = createFilterPanel();
         add(filterPanel, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel();
+        tableModel = new ListTableModel();
 
         setElements();
 
