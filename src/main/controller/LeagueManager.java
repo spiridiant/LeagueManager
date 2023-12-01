@@ -109,6 +109,9 @@ public class LeagueManager  implements LoginWindowDelegate, TerminalOperationDel
     public TeamStaff[] getTeamStaffInfo(String input) throws InvalidSalaryException {
         try {
             int salary = Integer.parseInt(input);
+            if(salary < 0) {
+                throw new NumberFormatException();
+            }
             return dbHandler.getTeamStaffInfo(salary);
         } catch(NumberFormatException e) {
             throw new InvalidSalaryException();
