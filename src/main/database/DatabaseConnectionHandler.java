@@ -327,7 +327,7 @@ public class DatabaseConnectionHandler {
     }
 
     public int getHigherThanAvgContractByLength(int length) {
-        ArrayList<Contract> result = new ArrayList<>();
+
 
         try {
             String query =  "SELECT AVG(c1.value) as avg_value " +

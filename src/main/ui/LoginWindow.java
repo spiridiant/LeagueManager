@@ -14,7 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The class is only responsible for displaying and handling the login GUI. 
+ * The class is only responsible for displaying and handling the login GUI.
+ * From demo project CPSC304_Java_Project with changes
  */
 public class LoginWindow extends JFrame implements ActionListener {
 	private static final int TEXT_FIELD_WIDTH = 10;
@@ -149,8 +150,5 @@ public class LoginWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		delegate.login(usernameField.getText(), String.valueOf(passwordField.getPassword()));
-//		delegate.login("ora_fgu05", "a22292734");
-        // delegate.login("ora_susan328", "a83200188");
-        //delegate.login("ora_kookevk", "a16389124");
 	}
 }
