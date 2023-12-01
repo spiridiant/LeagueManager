@@ -136,8 +136,8 @@ public class DeletePanel extends JPanel{
 
         JPanel playerSelectPanel = new JPanel();
         JPanel contractPanel = new JPanel();
-        playerSelectPanel.setBackground(new Color(34, 34, 34));
-        contractPanel.setBackground(new Color(34, 34, 34));
+        playerSelectPanel.setBackground(new Color(22, 30, 51));
+        contractPanel.setBackground(new Color(22, 30, 51));
 
         playerSelectPanel.setPreferredSize(new Dimension(600, 445));
         contractPanel.setPreferredSize(new Dimension(600, 100));
@@ -156,7 +156,7 @@ public class DeletePanel extends JPanel{
 
     public void makeCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(34, 34, 34));
+        centerPanel.setBackground(new Color(22, 30, 51));
         makePlayerPanel(centerPanel);
         add(centerPanel, BorderLayout.CENTER);
     }
